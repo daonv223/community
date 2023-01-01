@@ -1,8 +1,13 @@
 <?php
 use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+
 /** @var Template $block */
+/** @var SecureHtmlRenderer $secureRenderer */
 ?>
-<form>
+<form method="post" id="form-validate" enctype="multipart/form-data"
+      data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
+      autocomplete="off" data-mage-init='{"validation": {}}'>
     <fieldset class="fieldset">
         <?= $block->getBlockHtml('formkey') ?>
         <legend class="legend"><span><?= $block->escapeHtml(__('Join our community')) ?></span></legend><br>
@@ -34,10 +39,10 @@ use Magento\Framework\View\Element\Template;
             <label class="label" for="nickname"><span><?= $block->escapeHtml(__('Nickname')) ?></span></label>
             <div class="control">
                 <input type="text" name="nickname" id="nickname" data-input="change-nickname"
-                       value="<?= $block->escapeHtmlAttr('daonv223') ?>"
+                       value="<?= $block->escapeHtmlAttr('') ?>"
                        title="<?= $block->escapeHtmlAttr(__('Nickname')) ?>"
                        class="input-text"
-                       data-validate="{required:true, 'validate-nickname':true}" />
+                       data-validate="{required:true, 'validate-alphanum':true, 'max-words':32, 'min-words':6}" />
             </div>
         </div>
         <div class="field bio" data-container="change-bio">
@@ -56,12 +61,13 @@ use Magento\Framework\View\Element\Template;
 </form>
 <script>
     require([
-        'jquery'
+        'jquery',
+        "mage/mage"
     ], function ($) {
         $(function () {
             function readURL(input) {
                 if (input.files && input.files[0]) {
-                    var reader = new FileReader();
+                    const reader = new FileReader();
                     reader.onload = function(e) {
                         $('#imagePreview').css('background-image', 'url('+e.target.result +')');
                         $('#imagePreview').hide();
@@ -73,6 +79,10 @@ use Magento\Framework\View\Element\Template;
             $("#imageUpload").change(function() {
                 readURL(this);
             });
+            // let dataForm = $('#form-validate');
+            // dataForm.mage('validation', {
+            //     ignore: ':hidden'
+            // });
         });
     });
 </script>
