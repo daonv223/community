@@ -1,0 +1,78 @@
+<?php
+use Magento\Framework\View\Element\Template;
+/** @var Template $block */
+?>
+<form>
+    <fieldset class="fieldset">
+        <?= $block->getBlockHtml('formkey') ?>
+        <legend class="legend"><span><?= $block->escapeHtml(__('Join our community')) ?></span></legend><br>
+        <div class="field choice">
+            <input type="checkbox" name="is_registered" id="registration" data-role="register" value="1"
+                   title="<?= $block->escapeHtmlAttr(__('Is Registered')) ?>" class="checkbox" />
+            <label class="label" for="registration">
+                <span><?= $block->escapeHtml(__('Is Registered')) ?></span>
+            </label>
+        </div>
+    </fieldset>
+    <fieldset class="fieldset">
+        <legend class="legend">
+            <span data-title="change-member-information"><?= $block->escapeHtml(__('Member Information')) ?></span>
+        </legend><br>
+        <div class="field avatar container">
+            <div class="avatar-upload">
+                <div class="avatar-edit">
+                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                    <label for="imageUpload"></label>
+                </div>
+                <div class="avatar-preview">
+                    <div id="imagePreview" style="background-image: url(<?= $block->getViewFileUrl('DaoNguyen_Community::images/avatar-default.png') ?>);">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field nickname required" data-container="change-nickname">
+            <label class="label" for="nickname"><span><?= $block->escapeHtml(__('Nickname')) ?></span></label>
+            <div class="control">
+                <input type="text" name="nickname" id="nickname" data-input="change-nickname"
+                       value="<?= $block->escapeHtmlAttr('daonv223') ?>"
+                       title="<?= $block->escapeHtmlAttr(__('Nickname')) ?>"
+                       class="input-text"
+                       data-validate="{required:true, 'validate-nickname':true}" />
+            </div>
+        </div>
+        <div class="field bio" data-container="change-bio">
+            <label class="label" for="bio"><span><?= $block->escapeHtml(__('Bio')) ?></span></label>
+            <div class="control">
+                <textarea name="bio" id="bio" cols="5" rows="3" class="textarea"><?= $block->escapeHtml('Bio') ?></textarea>
+            </div>
+        </div>
+        <div class="field">
+            <strong><span><?= $block->escapeHtml(__('Your community rank:')) ?> </span><span>Window shopper</span></strong>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary"><button type="submit" title="<?= $block->escapeHtmlAttr(__('Save')) ?>" class="action save primary"><span><?= $block->escapeHtml(__('Save')) ?></span></button></div>
+    </div>
+</form>
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $(function () {
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                        $('#imagePreview').hide();
+                        $('#imagePreview').fadeIn(650);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#imageUpload").change(function() {
+                readURL(this);
+            });
+        });
+    });
+</script>

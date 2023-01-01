@@ -1,0 +1,20 @@
+{
+    "community_member": {
+        "column": {
+            "entity_id": true,
+            "customer_id": true,
+            "status": true,
+            "nickname": true,
+            "bio": true,
+            "avatar_path": true,
+            "points": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "COMMUNITY_MEMBER_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true,
+            "COMMUNITY_MEMBER_NICKNAME": true
+        }
+    }
+}

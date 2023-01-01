@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="community_member" resource="default" engine="innodb" comment="Community Member">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Member ID"/>
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="false" comment="Customer ID"/>
+        <column xsi:type="tinyint" name="status" unsigned="true" nullable="false" default="0" comment="Member Status"/>
+        <column xsi:type="varchar" name="nickname" nullable="false" length="32" comment="Nickname"/>
+        <column xsi:type="varchar" name="bio" nullable="true" length="512" comment="Bio"/>
+        <column xsi:type="varchar" name="avatar_path" nullable="true" length="512" comment="Avatar Path"/>
+        <column xsi:type="bigint" name="points" unsigned="true" nullable="false" default="0" comment="Rank System Points"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_MEMBER_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID"
+                    table="community_member" column="customer_id" referenceTable="customer_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="COMMUNITY_MEMBER_NICKNAME_UNIQUE">
+            <column name="nickname"/>
+        </constraint>
+    </table>
+</schema>
