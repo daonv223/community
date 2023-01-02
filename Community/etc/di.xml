@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="DaoNguyen\Community\Api\Data\MemberInterface" type="DaoNguyen\Community\Model\Member"/>
+    <preference for="DaoNguyen\Community\Api\MemberRepositoryInterface" type="DaoNguyen\Community\Model\MemberRepository"/>
+</config>

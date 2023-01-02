@@ -8,7 +8,7 @@
     </head>
     <body>
         <referenceContainer name="content">
-            <block name="member_edit" cacheable="false" template="DaoNguyen_Community::form/edit.phtml"/>
+            <block class="DaoNguyen\Community\Block\Member\Profile" name="member_edit" cacheable="false" template="DaoNguyen_Community::form/edit.phtml"/>
         </referenceContainer>
     </body>
 </page>
