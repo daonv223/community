@@ -48,11 +48,16 @@ class Media extends AbstractHelper
         MemberRepositoryInterface $memberRepository
     ) {
         parent::__construct($context);
-        $this->write = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
-        $this->write->create($this->getDirectoryRoot());
         $this->memberSession = $memberSession;
         $this->memberRepository = $memberRepository;
         $this->currentPath = null;
+        $this->write = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
+        if (!$this->write->isExist($this->write->getRelativePath($this->getDirectoryRoot()))) {
+            $this->write->create($this->getDirectoryRoot());
+        }
+        if (!$this->write->isExist($this->write->getRelativePath($this->getMembersPath()))) {
+            $this->write->create($this->getMembersPath());
+        }
     }
 
     /**
@@ -68,8 +73,8 @@ class Media extends AbstractHelper
             $memberId = $this->memberSession->getMemberId();
             if ($memberId) {
                 $member = $this->memberRepository->getById($memberId);
-                $path = $this->getDirectoryRoot() . '/' .$member->getNickname();
-                if (!$this->write->isDirectory($this->write->getRelativePath($path))) {
+                $path = $this->getMembersPath() . '/' .$member->getNickname();
+                if (!$this->write->isExist($this->write->getRelativePath($path))) {
                     $this->write->create($path);
                 }
                 $currentPath = $path;
@@ -87,5 +92,15 @@ class Media extends AbstractHelper
     public function getDirectoryRoot(): string
     {
         return $this->write->getAbsolutePath('community');
+    }
+
+    /**
+     * Get members subdirectory.
+     *
+     * @return string
+     */
+    public function getMembersPath(): string
+    {
+        return $this->write->getAbsolutePath('community/members');
     }
 }
