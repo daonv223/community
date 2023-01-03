@@ -16,5 +16,20 @@
             "COMMUNITY_MEMBER_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true,
             "COMMUNITY_MEMBER_NICKNAME": true
         }
+    },
+    "community_group": {
+        "column": {
+            "entity_id": true,
+            "name": true,
+            "is_active": true,
+            "description": true,
+            "avatar_path": true,
+            "auto_approve": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
     }
 }

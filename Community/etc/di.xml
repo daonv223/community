@@ -3,4 +3,11 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="DaoNguyen\Community\Api\Data\MemberInterface" type="DaoNguyen\Community\Model\Member"/>
     <preference for="DaoNguyen\Community\Api\MemberRepositoryInterface" type="DaoNguyen\Community\Model\MemberRepository"/>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="community_group_listing_data_source" xsi:type="string">DaoNguyen\Community\Model\ResourceModel\Group\Collection</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

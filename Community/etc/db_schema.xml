@@ -21,4 +21,17 @@
             <column name="nickname"/>
         </constraint>
     </table>
+    <table name="community_group" resource="default" engine="innodb" comment="Community Group">
+        <column name="entity_id" xsi:type="int" unsigned="true" nullable="false" identity="true" comment="Group ID"/>
+        <column name="name" xsi:type="varchar" length="32" nullable="false" comment="Group Name"/>
+        <column name="is_active" xsi:type="tinyint" unsigned="true" nullable="false" default="1" comment="Is Group Active"/>
+        <column name="description" xsi:type="varchar" length="512" nullable="false" comment="Group Description"/>
+        <column name="avatar_path" xsi:type="varchar" length="512" nullable="true" comment="Avatar Path"/>
+        <column name="auto_approve" xsi:type="tinyint" unsigned="true" nullable="false" default="1" comment="Auto Approve Post"/>
+        <column name="created_at" xsi:type="timestamp" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column name="updated_at" xsi:type="timestamp" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
 </schema>

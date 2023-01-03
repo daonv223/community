@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="DaoNguyen_Community::community" title="Community" translate="title" module="DaoNguyen_Community" sortOrder="11" resource="DaoNguyen_Community::community"/>
+        <add id="DaoNguyen_Community::group" title="Group" translate="title" module="DaoNguyen_Community" sortOrder="0" parent="DaoNguyen_Community::community" action="community/group" resource="DaoNguyen_Community::group"/>
+    </menu>
+</config>
