@@ -11,7 +11,7 @@ use Magento\Framework\App\Action\HttpGetActionInterface;
 
 class NewAction extends Action implements HttpGetActionInterface
 {
-    const ADMIN_RESOURCE = 'DaoNguyen_Community::save';
+    public const ADMIN_RESOURCE = 'DaoNguyen_Community::save';
 
     /**
      * @var ForwardFactory
@@ -29,6 +29,8 @@ class NewAction extends Action implements HttpGetActionInterface
     }
 
     /**
+     * Execute the request.
+     *
      * @return Forward
      */
     public function execute(): Forward

@@ -37,19 +37,14 @@
         <settings>
             <sticky>true</sticky>
         </settings>
-        <bookmark name="bookmarks"/>
-        <columnsControls name="columns_controls"/>
-        <filterSearch name="fulltext"/>
+        <filterSearch name="fulltext">
+            <settings>
+                <placeholder>Search by name group</placeholder>
+            </settings>
+        </filterSearch>
         <paging name="listing_paging"/>
     </listingToolbar>
     <columns name="community_group_columns">
-        <selectionsColumn name="ids">
-            <settings>
-                <indexField>entity_id</indexField>
-                <resizeEnabled>false</resizeEnabled>
-                <resizeDefaultWidth>55</resizeDefaultWidth>
-            </settings>
-        </selectionsColumn>
         <column name="entity_id">
             <settings>
                 <label translate="true">ID</label>

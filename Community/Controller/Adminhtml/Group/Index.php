@@ -44,7 +44,7 @@ class Index extends Action implements HttpGetActionInterface
     {
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->pageFactory->create();
-        $resultPage->setActiveMenu('DaoNguyen_Community::community');
+        $resultPage->setActiveMenu('DaoNguyen_Community::group');
         $resultPage->addBreadcrumb(__('Community'), __('Community'));
         $resultPage->addBreadcrumb(__('Manage Groups'), __('Manage Groups'));
         $resultPage->getConfig()->getTitle()->prepend(__('Groups'));

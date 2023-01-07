@@ -6,8 +6,13 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="community_group_listing_data_source" xsi:type="string">DaoNguyen\Community\Model\ResourceModel\Group\Collection</item>
+                <item name="community_group_listing_data_source" xsi:type="string">DaoNguyen\Community\Model\ResourceModel\Group\Grid\Collection</item>
             </argument>
+        </arguments>
+    </type>
+    <type name="DaoNguyen\Community\Model\ResourceModel\Group\Grid\Collection">
+        <arguments>
+            <argument name="resourceModel" xsi:type="string">DaoNguyen\Community\Model\ResourceModel\Group</argument>
         </arguments>
     </type>
 </config>

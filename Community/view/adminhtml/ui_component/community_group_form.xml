@@ -75,7 +75,34 @@
                 </checkbox>
             </formElements>
         </field>
-        <field name="name" sortOrder="20" formElement="input">
+        <field name="auto_approve" sortOrder="20" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">group</item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Auto Approve</label>
+                <dataScope>auto_approve</dataScope>
+                <tooltip>
+                    <description translate="true">Auto approve when member posting a post</description>
+                </tooltip>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>checkbox</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="name" sortOrder="30" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">group</item>
@@ -88,6 +115,20 @@
                 <dataType>text</dataType>
                 <label translate="true">Name</label>
                 <dataScope>name</dataScope>
+            </settings>
+        </field>
+        <field name="description" sortOrder="50" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">group</item>
+                    <item name="cols" xsi:type="number">15</item>
+                    <item name="rows" xsi:type="number">5</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Description</label>
+                <dataScope>description</dataScope>
             </settings>
         </field>
     </fieldset>
