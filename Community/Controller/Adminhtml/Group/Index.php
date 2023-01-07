@@ -16,7 +16,7 @@ class Index extends Action implements HttpGetActionInterface
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'DaoNguyen_Community::group';
+    const ADMIN_RESOURCE = 'DaoNguyen_Community::group_save';
 
     /**
      * @var PageFactory

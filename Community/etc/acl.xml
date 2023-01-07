@@ -5,7 +5,9 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="DaoNguyen_Community::community" title="Community" translate="title">
-                    <resource id="DaoNguyen_Community::group" title="Group" translate="title"/>
+                    <resource id="DaoNguyen_Community::group" title="Group" translate="title">
+                        <resource id="DaoNguyen_Community::group_save" title="Save Groups"/>
+                    </resource>
                 </resource>
             </resource>
         </resources>
