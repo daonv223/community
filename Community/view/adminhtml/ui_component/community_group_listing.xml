@@ -37,11 +37,8 @@
         <settings>
             <sticky>true</sticky>
         </settings>
-        <filterSearch name="fulltext">
-            <settings>
-                <placeholder>Search by name group</placeholder>
-            </settings>
-        </filterSearch>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters" />
         <paging name="listing_paging"/>
     </listingToolbar>
     <columns name="community_group_columns">
@@ -53,8 +50,49 @@
         </column>
         <column name="name">
             <settings>
-                <label translate="true">Title</label>
+                <label translate="true">Name</label>
             </settings>
         </column>
+        <column name="is_active" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options>
+                    <option name="active" xsi:type="array">
+                        <item name="label" xsi:type="string">Enabled</item>
+                        <item name="value" xsi:type="string">1</item>
+                    </option>
+                    <option name="not_active" xsi:type="array">
+                        <item name="label" xsi:type="string">Disabled</item>
+                        <item name="value" xsi:type="string">0</item>
+                    </option>
+                </options>
+                <dataType>select</dataType>
+                <filter>select</filter>
+                <label translate="true">Is Active</label>
+            </settings>
+        </column>
+        <column name="auto_approve" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options>
+                    <option name="approve" xsi:type="array">
+                        <item name="label" xsi:type="string">Approved</item>
+                        <item name="value" xsi:type="string">1</item>
+                    </option>
+                    <option name="not_approve" xsi:type="array">
+                        <item name="label" xsi:type="string">Not Approved</item>
+                        <item name="value" xsi:type="string">0</item>
+                    </option>
+                </options>
+                <dataType>select</dataType>
+                <filter>select</filter>
+                <label translate="true">Auto Approve</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="DaoNguyen\Community\Ui\Component\Listing\Column\EditAction">
+            <settings>
+                <indexField>entity_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
     </columns>
 </listing>

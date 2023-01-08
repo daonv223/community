@@ -58,6 +58,10 @@ class GroupRepository
     public function save(Group $group): Group
     {
         try {
+            $avatar = $group->getData('avatar_path');
+            if (is_array($avatar)) {
+                $group->setData('avatar_path', $avatar[0]['value']);
+            }
             $this->resource->save($group);
         } catch (Exception $e) {
             throw new CouldNotSaveException(

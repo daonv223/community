@@ -59,7 +59,8 @@ class Save extends Action implements HttpPostActionInterface
             $group->setData($data);
             try {
                 $this->groupRepository->save($group);
-            } catch (CouldNotSaveException) {
+                $this->messageManager->addSuccessMessage(__('You saved the group.'));
+            } catch (CouldNotSaveException $exception) {
                 $this->messageManager->addErrorMessage(__('Something went wrong while saving the group'));
             }
         }

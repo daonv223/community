@@ -117,6 +117,29 @@
                 <dataScope>name</dataScope>
             </settings>
         </field>
+        <field name="avatar_path" sortOrder="40" formElement="imageUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">group</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Group Avatar Uploader</label>
+                <componentType>imageUploader</componentType>
+                <dataType>string</dataType>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <allowedExtensions>jpg jpeg png</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">community/group_avatar/upload</param>
+                        </uploaderConfig>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
         <field name="description" sortOrder="50" formElement="textarea">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">

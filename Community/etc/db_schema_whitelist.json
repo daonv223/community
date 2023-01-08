@@ -30,6 +30,9 @@
         },
         "constraint": {
             "PRIMARY": true
+        },
+        "index": {
+            "COMMUNITY_GROUP_NAME_DESCRIPTION": true
         }
     }
 }

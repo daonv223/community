@@ -33,5 +33,9 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="entity_id"/>
         </constraint>
+        <index referenceId="COMMUNITY_GROUP_NAME_DESCRIPTION" indexType="fulltext">
+            <column name="name"/>
+            <column name="description"/>
+        </index>
     </table>
 </schema>
