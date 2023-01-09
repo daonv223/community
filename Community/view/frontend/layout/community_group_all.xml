@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="community"/>
+    <head>
+        <title>All Groups</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block name="all.groups.intro" template="DaoNguyen_Community::groups/intro.phtml"/>
+            <block name="all.groups" template="DaoNguyen_Community::groups/all.phtml" class="DaoNguyen\Community\Block\Group\AllGroups">
+                <block name="all.groups.item.renderer" as="item.renderer" template="DaoNguyen_Community::groups/item.phtml" class="DaoNguyen\Community\Block\Group\Item"/>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

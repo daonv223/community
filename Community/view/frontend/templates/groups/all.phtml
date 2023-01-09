@@ -1,0 +1,13 @@
+<?php
+use DaoNguyen\Community\Block\Group\AllGroups;
+/** @var AllGroups $block */
+
+?>
+<div class="all-groups-title">
+    <h3>All Groups</h3>
+</div>
+<div class="all-groups-container">
+    <?php foreach ($block->getAllGroups() as $group): ?>
+        <?= $block->getGroupCardHtml($group) ?>
+    <?php endforeach; ?>
+</div>

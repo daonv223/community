@@ -60,4 +60,77 @@
             }
         }
     }
+
+    .community-nav {
+        margin-bottom: 10px;
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #F5F5F5;
+            padding: 10px;
+            font-size: 15px;
+            font-weight: 800;
+        }
+        .nav-links {
+            display: flex;
+            padding: 0;
+            gap: 25px;
+            margin-bottom: 0;
+            align-items: center;
+
+            li {
+                margin-bottom: 0;
+
+                a {
+                    color: black;
+                }
+
+                a:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    .all-groups-title {
+        border-bottom: 1px solid #e8e8e8;
+    }
+
+    .all-groups-container {
+        margin-top: 20px;
+        display: flex;
+        gap: 25px;
+
+        .group-card-item {
+            width: 25%;
+
+            .card-container {
+                display: flex;
+                flex-direction: column;
+                border: 1px solid #e8e8e8;
+                box-shadow: 0 0 5px 0 #b1b1b1;
+                padding: 16px 32px 16px 32px;
+                align-items: center;
+                gap: 25px;
+
+                .group-details {
+                    text-align: center;
+                    color: black;
+
+                    .group-avatar {
+                        border-radius: 50%;
+                    }
+                }
+
+                .actions-toolbar {
+                    button {
+                        background: black;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
 }

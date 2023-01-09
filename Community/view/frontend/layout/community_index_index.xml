@@ -1,12 +1,8 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="1column">
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="community"/>
     <head>
         <title>Community Home</title>
     </head>
-    <body>
-        <referenceContainer name="top.container">
-            <block name="community.nav" template="DaoNguyen_Community::menu.phtml"/>
-        </referenceContainer>
-    </body>
 </page>

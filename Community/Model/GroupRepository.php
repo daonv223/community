@@ -3,10 +3,15 @@ declare(strict_types=1);
 
 namespace DaoNguyen\Community\Model;
 
+use DaoNguyen\Community\Model\Group\GroupSearchResults;
 use Exception;
+use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
+use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use DaoNguyen\Community\Model\ResourceModel\Group as GroupResource;
+use DaoNguyen\Community\Model\ResourceModel\Group\CollectionFactory;
+use DaoNguyen\Community\Model\Group\GroupSearchResultsFactory;
 
 class GroupRepository
 {
@@ -21,13 +26,39 @@ class GroupRepository
     private GroupResource $resource;
 
     /**
+     * @var CollectionFactory
+     */
+    private CollectionFactory $groupCollectionFactory;
+
+    /**
+     * @var CollectionProcessorInterface
+     */
+    private CollectionProcessorInterface $collectionProcessor;
+
+    /**
+     * @var GroupSearchResultsFactory
+     */
+    private GroupSearchResultsFactory $groupSearchResultsFactory;
+
+    /**
      * @param GroupFactory $groupFactory
      * @param GroupResource $resource
+     * @param CollectionFactory $groupCollectionFactory
+     * @param CollectionProcessorInterface $collectionProcessor
+     * @param GroupSearchResultsFactory $groupSearchResultsFactory
      */
-    public function __construct(GroupFactory $groupFactory, GroupResource $resource)
-    {
+    public function __construct(
+        GroupFactory $groupFactory,
+        GroupResource $resource,
+        CollectionFactory $groupCollectionFactory,
+        CollectionProcessorInterface $collectionProcessor,
+        GroupSearchResultsFactory $groupSearchResultsFactory,
+    ) {
         $this->groupFactory = $groupFactory;
         $this->resource = $resource;
+        $this->groupCollectionFactory = $groupCollectionFactory;
+        $this->collectionProcessor = $collectionProcessor;
+        $this->groupSearchResultsFactory = $groupSearchResultsFactory;
     }
 
     /**
@@ -70,5 +101,23 @@ class GroupRepository
             );
         }
         return $group;
+    }
+
+    /**
+     * Get group list.
+     *
+     * @param SearchCriteriaInterface $searchCriteria
+     * @return GroupSearchResults
+     */
+    public function getList(SearchCriteriaInterface $searchCriteria): GroupSearchResults
+    {
+        $collection = $this->groupCollectionFactory->create();
+        $this->collectionProcessor->process($searchCriteria, $collection);
+        /** @var GroupSearchResults $searchResults */
+        $searchResults = $this->groupSearchResultsFactory->create();
+        $searchResults->setSearchCriteria($searchCriteria);
+        $searchResults->setItems($collection->getItems());
+        $searchResults->setTotalCount($collection->getSize());
+        return $searchResults;
     }
 }

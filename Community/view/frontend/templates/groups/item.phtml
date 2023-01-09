@@ -1,0 +1,19 @@
+<?php
+use DaoNguyen\Community\Block\Group\Item;
+/** @var Item $block */
+$group = $block->getGroup();
+?>
+<div class="group-card-item">
+    <div class="card-container">
+        <a href="#">
+            <div class="group-details">
+                <img class="group-avatar" src="<?= $block->escapeHtmlAttr($group->getAvatarUrl()) ?>" alt="Group Avatar">
+                <h4 class="group-name"><?= $block->escapeHtml($group->getName()) ?></h4>
+                <div class="group-description"><?= $block->escapeHtml($group->getDescription()) ?></div>
+            </div>
+        </a>
+        <div class="actions-toolbar">
+            <div class="primary"><button>Join</button></div>
+        </div>
+    </div>
+</div>
