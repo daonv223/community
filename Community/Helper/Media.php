@@ -9,6 +9,7 @@ use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Exception\FileSystemException;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\Directory\WriteInterface;
 
@@ -65,14 +66,14 @@ class Media extends AbstractHelper
      *
      * @return string
      * @throws FileSystemException
+     * @throws LocalizedException
      */
     public function getCurrentPath(): string
     {
         if (!$this->currentPath) {
             $currentPath = $this->getDirectoryRoot();
-            $memberId = $this->memberSession->getMemberId();
-            if ($memberId) {
-                $member = $this->memberRepository->getById($memberId);
+            $member = $this->memberSession->getCurrentMember();
+            if ($member->getId()) {
                 $path = $this->getMembersPath() . '/' .$member->getNickname();
                 if (!$this->write->isExist($this->write->getRelativePath($path))) {
                     $this->write->create($path);

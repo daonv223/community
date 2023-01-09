@@ -19,7 +19,6 @@ use Magento\Framework\Data\Form\FormKey\Validator;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Validation\ValidationException;
 use Magento\Customer\Model\Session;
-use DaoNguyen\Community\Model\Session as MemberSession;
 
 class Save extends AbstractAccount implements HttpPostActionInterface
 {
@@ -49,15 +48,13 @@ class Save extends AbstractAccount implements HttpPostActionInterface
     private Storage $storage;
 
     /**
-     * @var MemberSession
-     */
-    private MemberSession $memberSession;
-
-    /**
      * @var DirectoryResolver
      */
     private DirectoryResolver $directoryResolver;
 
+    /**
+     * @var Filesystem\Directory\ReadInterface
+     */
     private Filesystem\Directory\ReadInterface $read;
 
     /**
@@ -67,7 +64,6 @@ class Save extends AbstractAccount implements HttpPostActionInterface
      * @param Validator $formKeyValidator
      * @param MemberRepositoryInterface $memberRepository
      * @param Storage $storage
-     * @param MemberSession $memberSession
      * @param DirectoryResolver $directoryResolver
      * @param Filesystem $filesystem
      */
@@ -78,7 +74,6 @@ class Save extends AbstractAccount implements HttpPostActionInterface
         Validator $formKeyValidator,
         MemberRepositoryInterface $memberRepository,
         Storage $storage,
-        MemberSession $memberSession,
         DirectoryResolver $directoryResolver,
         Filesystem $filesystem
     ) {
@@ -88,7 +83,6 @@ class Save extends AbstractAccount implements HttpPostActionInterface
         $this->formKeyValidator = $formKeyValidator;
         $this->memberRepository = $memberRepository;
         $this->storage = $storage;
-        $this->memberSession = $memberSession;
         $this->directoryResolver = $directoryResolver;
         $this->read = $filesystem->getDirectoryRead(DirectoryList::MEDIA);
     }
@@ -114,7 +108,6 @@ class Save extends AbstractAccount implements HttpPostActionInterface
                 $member->setBio($this->getRequest()->getParam('bio'));
                 $member->setStatus(MemberInterface::ACTIVE_STATUS);
                 $this->memberRepository->save($member);
-                $this->memberSession->setMemberId((int) $member->getId());
                 $result = $this->uploadAvatar();
                 if ($result) {
                     $avatarPath = '/' . $this->read->getRelativePath($result['path']) . '/' . $result['name'];

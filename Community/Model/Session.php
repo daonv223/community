@@ -3,30 +3,88 @@ declare(strict_types=1);
 
 namespace DaoNguyen\Community\Model;
 
-class Session extends \Magento\Customer\Model\Session
+use DaoNguyen\Community\Api\Data\MemberInterface;
+use DaoNguyen\Community\Api\MemberRepositoryInterface;
+use Exception;
+use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Framework\App\Response\Http;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\SessionException;
+use Magento\Framework\UrlFactory;
+
+class Session
 {
     /**
-     * Set member id.
-     *
-     * @param int $memberId
-     * @return $this
+     * @var CustomerSession
      */
-    public function setMemberId(int $memberId): Session
-    {
-        $this->storage->setData('member_id', $memberId);
-        return $this;
+    private CustomerSession $customerSession;
+
+    /**
+     * @var MemberRepositoryInterface
+     */
+    private MemberRepositoryInterface $memberRepository;
+
+    /**
+     * @var Http
+     */
+    private Http $response;
+
+    /**
+     * @var UrlFactory
+     */
+    private UrlFactory $urlFactory;
+
+    /**
+     * @param CustomerSession $customerSession
+     * @param MemberRepositoryInterface $memberRepository
+     * @param Http $response
+     * @param UrlFactory $urlFactory
+     */
+    public function __construct(
+        CustomerSession $customerSession,
+        MemberRepositoryInterface $memberRepository,
+        Http $response,
+        UrlFactory $urlFactory
+    ) {
+        $this->customerSession = $customerSession;
+        $this->memberRepository = $memberRepository;
+        $this->response = $response;
+        $this->urlFactory = $urlFactory;
     }
 
     /**
-     * Get member id.
+     * Get current member;
      *
-     * @return int|null
+     * @return MemberInterface
+     * @throws LocalizedException
      */
-    public function getMemberId(): ?int
+    public function getCurrentMember(): MemberInterface
     {
-        if ($this->storage->getData('member_id')) {
-            return (int) $this->storage->getData('member_id');
+        $customerId = (int) $this->customerSession->getCustomerId();
+        return $this->memberRepository->getByCustomerId($customerId);
+    }
+
+    /**
+     * Authenticate.
+     *
+     * @return bool
+     */
+    public function authenticate(): bool
+    {
+        try {
+            if ($this->customerSession->authenticate()) {
+                $currentMember = $this->getCurrentMember();
+                if (!$currentMember->getId()) {
+                    $this->response->setRedirect(
+                        $this->urlFactory->create()->getUrl('community/member')
+                    );
+                } else {
+                    return true;
+                }
+            }
+        } catch (Exception) {
+            return false;
         }
-        return null;
+        return false;
     }
 }

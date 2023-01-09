@@ -113,6 +113,6 @@ class Group extends AbstractModel implements IdentityInterface
      */
     public function getIdentities(): array
     {
-        return [self::CACHE_TAG . '_' . $this->getId()];
+        return [self::CACHE_TAG . '_' . $this->getId(), self::CACHE_TAG];
     }
 }

@@ -77,7 +77,7 @@ class AllGroups extends Template implements IdentityInterface
     public function getIdentities(): array
     {
         $allGroups = $this->getAllGroups();
-        $identities = [];
+        $identities = [Group::CACHE_TAG];
         foreach ($allGroups as $group) {
             /** @var Group $group */
             $identities[] = Group::CACHE_TAG . '_' . $group->getId();

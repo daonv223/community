@@ -101,10 +101,12 @@
     .all-groups-container {
         margin-top: 20px;
         display: flex;
-        gap: 25px;
+        flex-wrap: wrap;
 
         .group-card-item {
             width: 25%;
+            padding: 5px;
+            box-sizing: border-box;
 
             .card-container {
                 display: flex;
@@ -121,6 +123,12 @@
 
                     .group-avatar {
                         border-radius: 50%;
+                        width: 100%;
+                        height: 234px;
+                    }
+
+                    .group-description {
+                        height: 80px;
                     }
                 }
 
@@ -130,6 +138,10 @@
                         color: white;
                     }
                 }
+            }
+
+            a:hover {
+                text-decoration: none;
             }
         }
     }

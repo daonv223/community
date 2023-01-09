@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace DaoNguyen\Community\Block\Group;
 
 use DaoNguyen\Community\Model\Group;
+use Magento\Framework\Filter\FilterManager;
 use Magento\Framework\View\Element\Template;
 
 class Item extends Template
@@ -33,5 +34,16 @@ class Item extends Template
     {
         $this->group = $group;
         return  $this;
+    }
+
+    /**
+     * Truncate description.
+     *
+     * @param string $description
+     * @return string
+     */
+    public function truncateDescription(string $description): string
+    {
+        return $this->filterManager->truncate($description, ['length' => 120]);
     }
 }
