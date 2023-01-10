@@ -95,4 +95,12 @@ interface MemberInterface
      * @return string|null
      */
     public function getAvatarPath(): ?string;
+
+    /**
+     * Join groups.
+     *
+     * @param array $groupIds
+     * @return int
+     */
+    public function joinGroups(array $groupIds): int;
 }

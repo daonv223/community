@@ -115,4 +115,14 @@ class Group extends AbstractModel implements IdentityInterface
     {
         return [self::CACHE_TAG . '_' . $this->getId(), self::CACHE_TAG];
     }
+
+    /**
+     * Get entity id.
+     *
+     * @return int
+     */
+    public function getEntityId(): int
+    {
+        return (int) parent::getEntityId();
+    }
 }

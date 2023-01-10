@@ -1,5 +1,6 @@
 <?php
 use DaoNguyen\Community\Block\Group\Item;
+
 /** @var Item $block */
 $group = $block->getGroup();
 ?>
@@ -12,8 +13,13 @@ $group = $block->getGroup();
                 <div class="group-description"><?= $block->escapeHtml($block->truncateDescription($group->getDescription())) ?></div>
             </div>
         </a>
+        <form action="<?= $block->getUrl('community/member/join') ?>" method="post" id="join-group">
+            <input type="hidden" name="group_id" value="<?= $group->getId() ?>">
+        </form>
         <div class="actions-toolbar">
-            <div class="primary"><button>Join</button></div>
+            <div class="primary"><button type="submit" form="join-group" value="Join"
+                    <?php if ($block->isMemberJoin($group->getEntityId())): ?><?= "disabled" ?><?php endif; ?>
+                >Join</button></div>
         </div>
     </div>
 </div>

@@ -117,7 +117,7 @@ class Save extends AbstractAccount implements HttpPostActionInterface
             } catch (ValidationException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
                 return $this->redirectFactory->create()->setPath('community/member');
-            } catch (Exception) {
+            } catch (Exception $exception) {
                 $this->messageManager->addErrorMessage(__('Something went wrong while saving your registration.'));
                 return $this->redirectFactory->create()->setPath('community/member');
             }
@@ -133,6 +133,9 @@ class Save extends AbstractAccount implements HttpPostActionInterface
      */
     private function uploadAvatar(): bool|array
     {
+        if (!file_exists($_FILES['image']['tmp_name'])) {
+            return false;
+        }
         $currentPath = $this->_objectManager->get(Media::class)->getCurrentPath();
         if ($this->directoryResolver->validatePath($currentPath)) {
             return $this->storage->uploadFile($currentPath);

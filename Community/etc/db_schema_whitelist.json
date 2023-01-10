@@ -34,5 +34,18 @@
         "index": {
             "COMMUNITY_GROUP_NAME_DESCRIPTION": true
         }
+    },
+    "community_group_member": {
+        "column": {
+            "link_id": true,
+            "group_id": true,
+            "member_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "COMMUNITY_GROUP_MEMBER_GROUP_ID_COMMUNITY_GROUP_ENTITY_ID": true,
+            "COMMUNITY_GROUP_MEMBER_MEMBER_ID_COMMUNITY_MEMBER_ENTITY_ID": true,
+            "COMMUNITY_GROUP_MEMBER_GROUP_ID_MEMBER_ID": true
+        }
     }
 }

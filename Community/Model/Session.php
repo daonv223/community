@@ -9,7 +9,6 @@ use Exception;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Exception\SessionException;
 use Magento\Framework\UrlFactory;
 
 class Session

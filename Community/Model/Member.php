@@ -117,4 +117,27 @@ class Member extends AbstractModel implements MemberInterface
     {
         return $this->getData(MemberInterface::AVATAR_PATH);
     }
+
+    /**
+     * Join groups.
+     *
+     * @param array $groupIds
+     * @return int
+     */
+    public function joinGroups(array $groupIds): int
+    {
+        if (!$this->getId()) {
+            return 0;
+        }
+        $connection = $this->getResource()->getConnection();
+        $linkTable = $connection->getTableName('community_group_member');
+        $data = [];
+        foreach ($groupIds as $groupId) {
+            $data[] = [
+                'group_id' => $groupId,
+                'member_id' => $this->getId()
+            ];
+        }
+        return $connection->insertMultiple($linkTable, $data);
+    }
 }

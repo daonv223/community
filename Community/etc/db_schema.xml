@@ -38,4 +38,22 @@
             <column name="description"/>
         </index>
     </table>
+    <table name="community_group_member" resource="default" engine="innodb" comment="Community Group Member">
+        <column name="link_id" xsi:type="int" unsigned="true" nullable="false" identity="true" comment="Link ID"/>
+        <column name="group_id" xsi:type="int" unsigned="true" nullable="false" comment="Group ID"/>
+        <column name="member_id" xsi:type="int" unsigned="true" nullable="false" comment="Member ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="link_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_GROUP_MEMBER_GROUP_ID_COMMUNITY_GROUP_ENTITY_ID"
+                    table="community_group_member" column="group_id" referenceTable="community_group" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_GROUP_MEMBER_MEMBER_ID_COMMUNITY_MEMBER_ENTITY_ID"
+                    table="community_group_member" column="member_id" referenceTable="community_member" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="COMMUNITY_GROUP_MEMBER_GROUP_ID_MEMBER_ID">
+            <column name="group_id"/>
+            <column name="member_id"/>
+        </constraint>
+    </table>
 </schema>
