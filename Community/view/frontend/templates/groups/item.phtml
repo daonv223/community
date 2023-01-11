@@ -3,6 +3,8 @@ use DaoNguyen\Community\Block\Group\Item;
 
 /** @var Item $block */
 $group = $block->getGroup();
+$formId = 'form-' . $group->getId();
+$scope = 'button-join-' . $group->getId();
 ?>
 <div class="group-card-item">
     <div class="card-container">
@@ -13,13 +15,25 @@ $group = $block->getGroup();
                 <div class="group-description"><?= $block->escapeHtml($block->truncateDescription($group->getDescription())) ?></div>
             </div>
         </a>
-        <form action="<?= $block->getUrl('community/member/join') ?>" method="post" id="join-group">
+        <form action="<?= $block->getUrl('community/member/join') ?>" method="post" id="<?= $formId ?>">
             <input type="hidden" name="group_id" value="<?= $group->getId() ?>">
         </form>
-        <div class="actions-toolbar">
-            <div class="primary"><button type="submit" form="join-group" value="Join"
-                    <?php if ($block->isMemberJoin($group->getEntityId())): ?><?= "disabled" ?><?php endif; ?>
-                >Join</button></div>
+        <div class="actions-toolbar" data-bind="scope: '<?= $scope ?>'">
+            <div class="primary"><button data-bind="disable: isJoined()" type="submit" form="<?= $formId ?>" value="Join">Join</button></div>
         </div>
     </div>
 </div>
+<script type="text/x-magento-init">
+    {
+        ".actions-toolbar": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "<?= $scope ?>": {
+                        "component": "DaoNguyen_Community/js/view/join-button",
+                        "groupId": "<?= $group->getId() ?>"
+                    }
+                }
+            }
+        }
+    }
+</script>

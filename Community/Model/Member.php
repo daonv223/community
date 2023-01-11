@@ -6,6 +6,7 @@ namespace DaoNguyen\Community\Model;
 use DaoNguyen\Community\Api\Data\MemberInterface;
 use DaoNguyen\Community\Model\ResourceModel\Member as ResourceModel;
 use Magento\Framework\Model\AbstractModel;
+use Zend_Db_Statement_Exception;
 
 class Member extends AbstractModel implements MemberInterface
 {
@@ -139,5 +140,20 @@ class Member extends AbstractModel implements MemberInterface
             ];
         }
         return $connection->insertMultiple($linkTable, $data);
+    }
+
+    /**
+     * Get joined groups.
+     *
+     * @return array
+     * @throws Zend_Db_Statement_Exception
+     */
+    public function getJoinedGroups(): array
+    {
+        $connection = $this->getResource()->getConnection();
+        $select = $connection->select()
+            ->from('community_group_member', 'group_id')
+            ->where('member_id = ?', $this->getId());
+        return $connection->fetchCol($select);
     }
 }

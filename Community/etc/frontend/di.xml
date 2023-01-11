@@ -4,4 +4,11 @@
     <type name="DaoNguyen\Community\Controller\Member\MemberRegistrationInterface">
         <plugin name="member_registration" type="DaoNguyen\Community\Plugin\MemberRegistration"/>
     </type>
+    <type name="Magento\Customer\CustomerData\SectionPoolInterface">
+        <arguments>
+            <argument name="sectionSourceMap" xsi:type="array">
+                <item name="member" xsi:type="string">DaoNguyen\Community\CustomerData\Member</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
