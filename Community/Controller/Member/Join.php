@@ -57,11 +57,13 @@ class Join implements MemberRegistrationInterface, HttpPostActionInterface, Http
     public function execute()
     {
         $groupId = $this->request->getParam('group_id');
-        try {
-            $this->session->getCurrentMember()->joinGroups([$groupId]);
-            $this->messageManager->addSuccessMessage('You joined this group successfully.');
-        } catch (LocalizedException $e) {
-            $this->messageManager->addErrorMessage($e->getMessage());
+        if ($groupId) {
+            try {
+                $this->session->getCurrentMember()->joinGroups([$groupId]);
+                $this->messageManager->addSuccessMessage('You joined this group successfully.');
+            } catch (LocalizedException $e) {
+                $this->messageManager->addErrorMessage($e->getMessage());
+            }
         }
         return $this->redirectFactory->create()->setPath('community/group/all');
     }

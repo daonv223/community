@@ -7,11 +7,11 @@ use Magento\Framework\View\Element\Template;
         <ul class="nav-links">
             <li class="nav-item"><a href="<?= $block->getUrl('community') ?>">Community</a></li>
             <li class="nav-item"><a href="<?= $block->getUrl('community/member') ?>">Profile</a></li>
-            <li class="nav-item"><a href="<?= $block->getUrl('community/group/all') ?>">Group</a></li>
+            <li class="nav-item"><a href="<?= $block->getUrl('community/group/all') ?>">Groups</a></li>
             <li class="nav-item"><a href="#">Gallery</a></li>
         </ul>
         <ul class="nav-links">
-            <li class="nav-item"><a href="#">Create a Post</a></li>
+            <li class="nav-item"><a href="<?= $block->getUrl('community/post/create') ?>">Create a Post</a></li>
             <li class="nav-item"><a href="#">Add a Photo</a></li>
         </ul>
     </nav>

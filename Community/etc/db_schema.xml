@@ -56,4 +56,29 @@
             <column name="member_id"/>
         </constraint>
     </table>
+    <table name="community_post" resource="default" engine="innodb" comment="Community Post">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Group ID"/>
+        <column xsi:type="int" name="member_id" unsigned="true" nullable="false" comment="Member ID"/>
+        <column xsi:type="int" name="group_id" unsigned="true" nullable="false" comment="Group ID"/>
+        <column name="subject" xsi:type="varchar" length="256" nullable="false" comment="Post Subject"/>
+        <column name="content" xsi:type="text" nullable="false" comment="Post Content"/>
+        <column name="status" xsi:type="tinyint" unsigned="true" nullable="false" default="1" comment="Post Status"/>
+        <column name="is_subscribed" xsi:type="tinyint" unsigned="true" nullable="false" default="1" comment="Is Author Subscribed"/>
+        <column name="views" xsi:type="int" unsigned="true" nullable="false" default="0" comment="Post Views"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_POST_MEMBER_ID_COMMUNITY_MEMBER_ENTITY_ID"
+                    table="community_post" column="member_id" referenceTable="community_member" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_POST_GROUP_ID_COMMUNITY_GROUP_ENTITY_ID"
+                    table="community_post" column="group_id" referenceTable="community_group" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="COMMUNITY_POST_SUBJECT_CONTENT" indexType="fulltext">
+            <column name="subject"/>
+            <column name="content"/>
+        </index>
+    </table>
 </schema>
