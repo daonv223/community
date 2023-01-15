@@ -71,7 +71,9 @@ class Session
     public function authenticate(): bool
     {
         try {
-            if ($this->customerSession->authenticate()) {
+            $result = $this->customerSession->authenticate();
+            $this->customerSession->setBeforeAuthUrl($this->urlFactory->create()->getUrl('community'));
+            if ($result) {
                 $currentMember = $this->getCurrentMember();
                 if (!$currentMember->getId()) {
                     $this->response->setRedirect(
@@ -81,9 +83,9 @@ class Session
                     return true;
                 }
             }
+            return false;
         } catch (Exception) {
             return false;
         }
-        return false;
     }
 }

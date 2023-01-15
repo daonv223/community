@@ -1,0 +1,61 @@
+<?php
+use DaoNguyen\Community\Block\Post\Create\Form;
+/** @var Form $block */
+?>
+<form method="post" class="create-post-form" id="create-post-form">
+    <?= $block->getBlockHtml('formkey') ?>
+    <fieldset class="fieldset create-post-form-fieldset" data-hasrequired="<?= $block->escapeHtmlAttr('* Required Fields') ?>">
+        <div class="field subject-field required">
+            <label for="subject" class="label"><span><?= $block->escapeHtml(__('Subject')) ?></span></label>
+            <div class="control">
+                <input type="text" name="subject" id="subject" class="input-text" placeholder="Enter a subject" data-validate="{required: true}"/>
+            </div>
+        </div>
+        <div class="field group-field required">
+            <label for="group_id" class="label"><span><?= $block->escapeHtml(__('Group')) ?></span></label>
+            <div class="control">
+                <select id="group_id" name="group_id" class="input-select">
+                    <?php foreach ($block->toOptionArray() as $option): ?>
+                        <option value="<?= $block->escapeHtmlAttr($option['value']) ?>">
+                            <?= $block->escapeHtml($option['label']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+        <div class="field content-field required" data-bind="scope: 'content-editor'">
+            <label for="content_editor" class="label"><span><?= $block->escapeHtml('Content') ?></span></label>
+            <div class="control">
+                <textarea id="content_editor" name="content"></textarea>
+            </div>
+        </div>
+        <div class="field is_subscribed-field">
+            <input type="checkbox" name="is_subscribed" id="is_subscribed" checked title="<?= $block->escapeHtmlAttr(__('Email me when someone replies')) ?>" class="checkbox" />
+            <label class="label" for="is_subscribed"><span><?= $block->escapeHtml(__('Email me when someone replied')) ?></span></label>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar create-post-form-actions">
+        <div class="message info note">
+            <div>By clicking "Post," you agree to this community guidelines and Terms of Use. Please make sure there's no inappropriate language, personal contact info, or non-Community URLs in your post.</div>
+        </div>
+        <div class="primary actions-primary">
+            <button type="submit" class="action submit primary"><span><?= $block->escapeHtml(__('Post')) ?></span></button>
+        </div>
+    </div>
+</form>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "content-editor": {
+                        "component": "DaoNguyen_Community/js/view/content-editor",
+                        "config": {
+                            "editorConfig": <?= $block->getEditor()->getConfig() ?>
+                        }
+                    }
+                }
+            }
+        }
+    }
+</script>

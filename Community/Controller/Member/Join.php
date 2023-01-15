@@ -4,14 +4,13 @@ declare(strict_types=1);
 namespace DaoNguyen\Community\Controller\Member;
 
 use DaoNguyen\Community\Model\Session;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\Result\RedirectFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Message\Manager;
 
-class Join implements MemberRegistrationInterface, HttpPostActionInterface, HttpGetActionInterface
+class Join implements MemberRegistrationInterface, HttpPostActionInterface
 {
     /**
      * @var RedirectFactory

@@ -5,4 +5,15 @@
     <head>
         <title>New Post</title>
     </head>
+    <body>
+        <referenceContainer name="content">
+            <block name="community.post.create.title" template="DaoNguyen_Community::post/create/title.phtml"/>
+            <block name="community.post.create.form" template="DaoNguyen_Community::post/create/form.phtml" class="DaoNguyen\Community\Block\Post\Create\Form">
+                <arguments>
+                    <argument name="all_groups" xsi:type="object">DaoNguyen\Community\ViewModel\AllGroups</argument>
+                    <argument name="editor" xsi:type="object">DaoNguyen\Community\ViewModel\Editor</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
 </page>
