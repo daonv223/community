@@ -3,13 +3,14 @@ declare(strict_types=1);
 
 namespace DaoNguyen\Community\Helper;
 
-use DaoNguyen\Community\Api\MemberRepositoryInterface;
 use DaoNguyen\Community\Model\Session;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Exception\SessionException;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\Directory\WriteInterface;
 
@@ -31,26 +32,18 @@ class Media extends AbstractHelper
     private Session $memberSession;
 
     /**
-     * @var MemberRepositoryInterface
-     */
-    private MemberRepositoryInterface $memberRepository;
-
-    /**
      * @param Context $context
      * @param Filesystem $filesystem
      * @param Session $memberSession
-     * @param MemberRepositoryInterface $memberRepository
      * @throws FileSystemException
      */
     public function __construct(
         Context $context,
         Filesystem $filesystem,
-        Session $memberSession,
-        MemberRepositoryInterface $memberRepository
+        Session $memberSession
     ) {
         parent::__construct($context);
         $this->memberSession = $memberSession;
-        $this->memberRepository = $memberRepository;
         $this->currentPath = null;
         $this->write = $filesystem->getDirectoryWrite(DirectoryList::MEDIA);
         if (!$this->write->isExist($this->write->getRelativePath($this->getDirectoryRoot()))) {
@@ -67,20 +60,21 @@ class Media extends AbstractHelper
      * @return string
      * @throws FileSystemException
      * @throws LocalizedException
+     * @throws SessionException
      */
     public function getCurrentPath(): string
     {
         if (!$this->currentPath) {
-            $currentPath = $this->getDirectoryRoot();
             $member = $this->memberSession->getCurrentMember();
             if ($member->getId()) {
-                $path = $this->getMembersPath() . '/' .$member->getNickname();
+                $path = $this->getMembersPath() . '/' .$member->getUuid();
                 if (!$this->write->isExist($this->write->getRelativePath($path))) {
                     $this->write->create($path);
                 }
-                $currentPath = $path;
+                $this->currentPath = $path;
+            } else {
+                
             }
-            $this->currentPath = $currentPath;
         }
         return $this->currentPath;
     }

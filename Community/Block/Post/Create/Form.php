@@ -46,6 +46,7 @@ class Form extends Template implements IdentityInterface
         foreach ($allGroupsViewModel->getAllActiveGroups() as $group) {
             $identities[] = Group::CACHE_TAG . '_' . $group->getId();
         }
+        $this->getUrl();
         return $identities;
     }
 }

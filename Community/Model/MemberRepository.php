@@ -8,6 +8,7 @@ use DaoNguyen\Community\Api\Data\MemberInterfaceFactory;
 use DaoNguyen\Community\Api\MemberRepositoryInterface;
 use DaoNguyen\Community\Model\ResourceModel\Member as MemberResource;
 use Magento\Framework\Validation\ValidationException;
+use Ramsey\Uuid\Uuid;
 
 class MemberRepository implements MemberRepositoryInterface
 {
@@ -54,10 +55,19 @@ class MemberRepository implements MemberRepositoryInterface
             throw new ValidationException(__('The Nickname Already Exists!'));
         }
         $member->setUpdatedAt((string) time());
+        if (!$member->getId()) {
+            $member->setUuid(Uuid::uuid4()->toString());
+        }
         $this->memberResource->save($member);
         return $member;
     }
 
+    /**
+     * Get member by id.
+     *
+     * @param int $memberId
+     * @return MemberInterface
+     */
     public function getById(int $memberId): MemberInterface
     {
         $member = $this->memberInterfaceFactory->create();

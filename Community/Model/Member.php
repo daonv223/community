@@ -156,4 +156,26 @@ class Member extends AbstractModel implements MemberInterface
             ->where('member_id = ?', $this->getId());
         return $connection->fetchCol($select);
     }
+
+    /**
+     * Set uuid.
+     *
+     * @param string $uuid
+     * @return MemberInterface
+     */
+    public function setUuid(string $uuid): MemberInterface
+    {
+        $this->setData(MemberInterface::UUID, $uuid);
+        return $this;
+    }
+
+    /**
+     * Get uuid.
+     *
+     * @return string|null
+     */
+    public function getUuid(): ?string
+    {
+        return $this->getData(MemberInterface::UUID);
+    }
 }

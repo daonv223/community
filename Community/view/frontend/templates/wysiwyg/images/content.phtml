@@ -1,0 +1,13 @@
+<?php
+use DaoNguyen\Community\Block\Wysiwyg\Images\Content;
+/** @var Content $block */
+?>
+<div class="media-gallery-modal">
+    <div class="main-col">
+        <div id="error-message" data-action="show-error"></div>
+        <div id="contents-uploader" class="contents-uploader">
+            <?= $block->getChildHtml('wysiwyg_images.uploader') ?>
+        </div>
+        <div id="contents"></div>
+    </div>
+</div>

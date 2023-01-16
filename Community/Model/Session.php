@@ -9,6 +9,7 @@ use Exception;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\SessionException;
 use Magento\Framework\UrlFactory;
 
 class Session
@@ -52,14 +53,18 @@ class Session
     }
 
     /**
-     * Get current member;
+     * Get current member.
      *
      * @return MemberInterface
      * @throws LocalizedException
+     * @throws SessionException
      */
     public function getCurrentMember(): MemberInterface
     {
         $customerId = (int) $this->customerSession->getCustomerId();
+        if (!$customerId) {
+            throw new SessionException(__('The session value is invalid. Verify and try again.'));
+        }
         return $this->memberRepository->getByCustomerId($customerId);
     }
 

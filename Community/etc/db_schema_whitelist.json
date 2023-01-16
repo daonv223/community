@@ -9,7 +9,8 @@
             "avatar_path": true,
             "points": true,
             "created_at": true,
-            "updated_at": true
+            "updated_at": true,
+            "uuid": true
         },
         "constraint": {
             "PRIMARY": true,
@@ -46,6 +47,28 @@
             "COMMUNITY_GROUP_MEMBER_GROUP_ID_COMMUNITY_GROUP_ENTITY_ID": true,
             "COMMUNITY_GROUP_MEMBER_MEMBER_ID_COMMUNITY_MEMBER_ENTITY_ID": true,
             "COMMUNITY_GROUP_MEMBER_GROUP_ID_MEMBER_ID": true
+        }
+    },
+    "community_post": {
+        "column": {
+            "entity_id": true,
+            "member_id": true,
+            "group_id": true,
+            "subject": true,
+            "content": true,
+            "status": true,
+            "is_subscribed": true,
+            "views": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "COMMUNITY_POST_SUBJECT_CONTENT": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "COMMUNITY_POST_MEMBER_ID_COMMUNITY_MEMBER_ENTITY_ID": true,
+            "COMMUNITY_POST_GROUP_ID_COMMUNITY_GROUP_ENTITY_ID": true
         }
     }
 }

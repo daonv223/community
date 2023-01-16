@@ -12,6 +12,7 @@ interface MemberInterface
     public const ACTIVE_STATUS = 1;
     public const UPDATED_AT = 'updated_at';
     public const AVATAR_PATH = 'avatar_path';
+    public const UUID = 'uuid';
 
     /**
      * Is member registered.
@@ -103,4 +104,19 @@ interface MemberInterface
      * @return int
      */
     public function joinGroups(array $groupIds): int;
+
+    /**
+     * Set uuid.
+     *
+     * @param string $uuid
+     * @return MemberInterface
+     */
+    public function setUuid(string $uuid): MemberInterface;
+
+    /**
+     * Get Uuid.
+     *
+     * @return string|null
+     */
+    public function getUuid(): ?string;
 }

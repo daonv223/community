@@ -28,18 +28,26 @@ class Editor implements ArgumentInterface
     private Repository $assetRepo;
 
     /**
+     * @var UrlInterface
+     */
+    private UrlInterface $urlBuilder;
+
+    /**
      * @param SerializerInterface $serializer
      * @param StoreManagerInterface $storeManager
      * @param Repository $assetRepo
+     * @param UrlInterface $urlBuilder
      */
     public function __construct(
         SerializerInterface $serializer,
         StoreManagerInterface $storeManager,
-        Repository $assetRepo
+        Repository $assetRepo,
+        UrlInterface $urlBuilder
     ) {
         $this->serializer = $serializer;
         $this->storeManager = $storeManager;
         $this->assetRepo = $assetRepo;
+        $this->urlBuilder = $urlBuilder;
     }
 
     /**
@@ -50,11 +58,11 @@ class Editor implements ArgumentInterface
      */
     public function getConfig(): string
     {
+        $fileBrowserWindowUrl = $this->urlBuilder->getUrl('community/wysiwyg_images/index');
         $currentStore = $this->storeManager->getStore();
         $config = [
             'baseStaticUrl' => $currentStore->getBaseUrl(UrlInterface::URL_TYPE_STATIC),
             'baseStaticDefaultUrl' => $currentStore->getBaseUrl() . $currentStore->getBaseStaticDir() . '/',
-            'directives_url' => '',
             'width' => '100%',
             'height' => '500px',
             'plugins' => [
@@ -62,7 +70,9 @@ class Editor implements ArgumentInterface
                     'name' => 'image'
                 ]
             ],
-            'directives_url_quoted' => '',
+            'files_browser_window_url' => $fileBrowserWindowUrl,
+            'files_browser_window_width' => '1000',
+            'files_browser_window_height' => '600',
             'activeEditorPath' => 'mage/adminhtml/wysiwyg/tiny_mce/tinymce5Adapter',
             'tinymce' => [
                 'toolbar' => "undo redo | styleselect | fontsizeselect | lineheight | forecolor backcolor | bold italic underline | alignleft aligncenter alignright | numlist bullist | link image table charmap",

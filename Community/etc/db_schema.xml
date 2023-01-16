@@ -4,6 +4,7 @@
     <table name="community_member" resource="default" engine="innodb" comment="Community Member">
         <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true" comment="Member ID"/>
         <column xsi:type="int" name="customer_id" unsigned="true" nullable="false" comment="Customer ID"/>
+        <column name="uuid" xsi:type="varchar" length="64" nullable="false" comment="Member Uuid"/>
         <column xsi:type="tinyint" name="status" unsigned="true" nullable="false" default="0" comment="Member Status"/>
         <column xsi:type="varchar" name="nickname" nullable="false" length="32" comment="Nickname"/>
         <column xsi:type="varchar" name="bio" nullable="true" length="512" comment="Bio"/>
