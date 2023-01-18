@@ -9,6 +9,7 @@ use Exception;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\SessionException;
 use Magento\Framework\UrlFactory;
 
@@ -56,8 +57,8 @@ class Session
      * Get current member.
      *
      * @return MemberInterface
-     * @throws LocalizedException
      * @throws SessionException
+     * @throws NoSuchEntityException
      */
     public function getCurrentMember(): MemberInterface
     {

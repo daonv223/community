@@ -1,9 +1,6 @@
 <?xml version="1.0"?>
 <layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
     <container name="root">
-        <block name="wysiwyg_images.content" class="DaoNguyen\Community\Block\Wysiwyg\Images\Content" template="DaoNguyen_Community::wysiwyg/images/content.phtml">
-            <block class="DaoNguyen\Community\Block\Wysiwyg\Images\Uploader" name="wysiwyg_images.uploader" template="DaoNguyen_Community::wysiwyg/images/uploader.phtml">
-            </block>
-        </block>
+        <block name="wysiwyg_images.content" class="DaoNguyen\Community\Block\Wysiwyg\Images\Content" template="DaoNguyen_Community::wysiwyg/images/content.phtml"/>
     </container>
 </layout>

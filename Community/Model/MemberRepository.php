@@ -7,6 +7,7 @@ use DaoNguyen\Community\Api\Data\MemberInterface;
 use DaoNguyen\Community\Api\Data\MemberInterfaceFactory;
 use DaoNguyen\Community\Api\MemberRepositoryInterface;
 use DaoNguyen\Community\Model\ResourceModel\Member as MemberResource;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Validation\ValidationException;
 use Ramsey\Uuid\Uuid;
 
@@ -33,13 +34,20 @@ class MemberRepository implements MemberRepositoryInterface
     }
 
     /**
-     * @inheritdoc
+     * Get customer by id.
+     *
+     * @param int $customerId
+     * @return MemberInterface
+     * @throws NoSuchEntityException
      */
     public function getByCustomerId(int $customerId): MemberInterface
     {
         /** @var Member $member */
         $member = $this->memberInterfaceFactory->create();
         $this->memberResource->load($member, $customerId, MemberInterface::CUSTOMER_ID);
+        if (!$member->getId()) {
+            throw new NoSuchEntityException(__('The member with the "%1" customer id doesn\'t exist.', $customerId));
+        }
         return $member;
     }
 

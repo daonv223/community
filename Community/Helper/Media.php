@@ -60,21 +60,18 @@ class Media extends AbstractHelper
      * @return string
      * @throws FileSystemException
      * @throws LocalizedException
+     * @throws NoSuchEntityException
      * @throws SessionException
      */
     public function getCurrentPath(): string
     {
         if (!$this->currentPath) {
             $member = $this->memberSession->getCurrentMember();
-            if ($member->getId()) {
-                $path = $this->getMembersPath() . '/' .$member->getUuid();
-                if (!$this->write->isExist($this->write->getRelativePath($path))) {
-                    $this->write->create($path);
-                }
-                $this->currentPath = $path;
-            } else {
-                
+            $path = $this->getMembersPath() . '/' . $member->getUuid();
+            if (!$this->write->isExist($this->write->getRelativePath($path))) {
+                $this->write->create($path);
             }
+            $this->currentPath = $path;
         }
         return $this->currentPath;
     }

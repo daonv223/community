@@ -5,6 +5,7 @@ namespace DaoNguyen\Community\Api;
 
 use DaoNguyen\Community\Api\Data\MemberInterface;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Validation\ValidationException;
 
 interface MemberRepositoryInterface
@@ -14,7 +15,7 @@ interface MemberRepositoryInterface
      *
      * @param int $customerId
      * @return MemberInterface
-     * @throws LocalizedException
+     * @throws NoSuchEntityException
      */
     public function getByCustomerId(int $customerId): MemberInterface;
 

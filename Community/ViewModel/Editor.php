@@ -58,7 +58,12 @@ class Editor implements ArgumentInterface
      */
     public function getConfig(): string
     {
-        $fileBrowserWindowUrl = $this->urlBuilder->getUrl('community/wysiwyg_images/index');
+        $fileBrowserWindowUrl = $this->urlBuilder->getUrl(
+            'community/wysiwyg_images/index',
+            [
+                'current_tree_path' => strtr(base64_encode('community/members'), '+/=', ':_-')
+            ]
+        );
         $currentStore = $this->storeManager->getStore();
         $config = [
             'baseStaticUrl' => $currentStore->getBaseUrl(UrlInterface::URL_TYPE_STATIC),

@@ -4,10 +4,28 @@ use DaoNguyen\Community\Block\Wysiwyg\Images\Content;
 ?>
 <div class="media-gallery-modal">
     <div class="main-col">
-        <div id="error-message" data-action="show-error"></div>
         <div id="contents-uploader" class="contents-uploader">
-            <?= $block->getChildHtml('wysiwyg_images.uploader') ?>
+            <div id="uploader" class="uploader">
+                <span class="fileinput-button form-buttons">
+                    <span><?= $block->escapeHtml(__('Upload Images')) ?></span>
+                    <input class="fileupload" type="file"
+                           name="image"
+                           data-url="<?= $block->getUrl('community/wysiwyg_images/upload') ?>" multiple>
+                </span>
+            </div>
         </div>
         <div id="contents"></div>
     </div>
 </div>
+<script type="text/x-magento-init">
+    {
+        ".uploader": {
+            "DaoNguyen_Community/js/view/media-modal": {
+                "maxFileSize": 104857600,
+                "maxWidth": 1920,
+                "maxHeight": 1200,
+                "isResizeEnabled": 1
+            }
+        }
+    }
+</script>
