@@ -82,4 +82,54 @@
             <column name="content"/>
         </index>
     </table>
+    <table name="community_media" resource="default" engine="innodb" comment="Community Media">
+        <column name="value_id" xsi:type="int" unsigned="true" nullable="false" identity="true" comment="Value ID"/>
+        <column name="member_id" xsi:type="int" unsigned="true" nullable="false" comment="Member ID"/>
+        <column name="type" xsi:type="varchar" length="32" nullable="true" comment="Media Type"/>
+        <column name="path" xsi:type="varchar" length="512" nullable="false" comment="Path"/>
+        <column name="title" xsi:type="varchar" length="128" nullable="true" comment="Title"/>
+        <column name="description" xsi:type="varchar" length="512" nullable="true" comment="Description"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="value_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_MEDIA_MEMBER_ID_COMMUNITY_MEMBER_ENTITY_ID"
+                    table="community_media" column="member_id" referenceTable="community_member" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+    </table>
+    <table name="community_media_group" resource="default" engine="innodb" comment="Community Media Group">
+        <column name="link_id" xsi:type="int" unsigned="true" nullable="false" identity="true" comment="Link ID"/>
+        <column name="group_id" xsi:type="int" unsigned="true" nullable="true" comment="Group ID"/>
+        <column name="value_id" xsi:type="int" unsigned="true" nullable="false" comment="Value ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="link_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_MEDIA_GROUP_GROUP_ID_COMMUNITY_GROUP_ENTITY_ID"
+                    table="community_media_group" column="group_id" referenceTable="community_group" referenceColumn="entity_id"
+                    onDelete="SET NULL"/>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_MEDIA_GROUP_VALUE_ID_COMMUNITY_MEDIA_VALUE_ID"
+                    table="community_media_group" column="value_id" referenceTable="community_media" referenceColumn="value_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="COMMUNITY_MEDIA_GROUP_GROUP_ID_VALUE_ID">
+            <column name="group_id"/>
+            <column name="value_id"/>
+        </constraint>
+    </table>
+    <table name="community_media_post" resource="default" engine="innodb" comment="Community Media Post">
+        <column name="link_id" xsi:type="int" unsigned="true" nullable="false" identity="true" comment="Link ID"/>
+        <column name="post_id" xsi:type="int" unsigned="true" nullable="true" comment="Post ID"/>
+        <column name="value_id" xsi:type="int" unsigned="true" nullable="false" comment="Value ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="link_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_MEDIA_POST_POST_ID_COMMUNITY_POST_ENTITY_ID"
+                    table="community_media_post" column="post_id" referenceTable="community_post" referenceColumn="entity_id"
+                    onDelete="SET NULL"/>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_MEDIA_POST_VALUE_ID_COMMUNITY_MEDIA_VALUE_ID"
+                    table="community_media_post" column="value_id" referenceTable="community_media" referenceColumn="value_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="COMMUNITY_MEDIA_POST_POST_ID_VALUE_ID">
+            <column name="post_id"/>
+            <column name="value_id"/>
+        </constraint>
+    </table>
 </schema>

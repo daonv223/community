@@ -6,9 +6,10 @@ namespace DaoNguyen\Community\Controller\Member;
 use DaoNguyen\Community\Api\Data\MemberInterface;
 use DaoNguyen\Community\Api\MemberRepositoryInterface;
 use DaoNguyen\Community\Helper\Media;
-use DaoNguyen\Community\Model\Media\Storage;
+use DaoNguyen\Community\Model\Member\Gallery\Storage;
 use Exception;
 use Magento\Customer\Controller\AbstractAccount;
+use Magento\Customer\Model\Session;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -16,9 +17,9 @@ use Magento\Framework\App\Filesystem\DirectoryResolver;
 use Magento\Framework\Controller\Result\RedirectFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Data\Form\FormKey\Validator;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Validation\ValidationException;
-use Magento\Customer\Model\Session;
 
 class Save extends AbstractAccount implements HttpPostActionInterface
 {
@@ -103,10 +104,14 @@ class Save extends AbstractAccount implements HttpPostActionInterface
         } else {
             try {
                 $member = $this->memberRepository->getByCustomerId($customerId);
+            } catch (NoSuchEntityException) {
+                $member = $this->_objectManager->create(MemberInterface::class);
                 $member->setCustomerId($customerId);
-                $member->setNickname($this->getRequest()->getParam('nickname'));
-                $member->setBio($this->getRequest()->getParam('bio'));
-                $member->setStatus(MemberInterface::ACTIVE_STATUS);
+            }
+            $member->setNickname($this->getRequest()->getParam('nickname'));
+            $member->setBio($this->getRequest()->getParam('bio'));
+            $member->setStatus(MemberInterface::ACTIVE_STATUS);
+            try {
                 $this->memberRepository->save($member);
                 $result = $this->uploadAvatar();
                 if ($result) {
@@ -117,7 +122,7 @@ class Save extends AbstractAccount implements HttpPostActionInterface
             } catch (ValidationException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
                 return $this->redirectFactory->create()->setPath('community/member');
-            } catch (Exception $exception) {
+            } catch (Exception) {
                 $this->messageManager->addErrorMessage(__('Something went wrong while saving your registration.'));
                 return $this->redirectFactory->create()->setPath('community/member');
             }
@@ -127,20 +132,20 @@ class Save extends AbstractAccount implements HttpPostActionInterface
     }
 
     /**
-     * Upload avatar.
+     * Upload avatar process.
      *
-     * @throws Exception
+     * @return bool|array
      */
     private function uploadAvatar(): bool|array
     {
         if (!file_exists($_FILES['image']['tmp_name'])) {
             return false;
         }
-        $currentPath = $this->_objectManager->get(Media::class)->getCurrentPath();
-        if ($this->directoryResolver->validatePath($currentPath)) {
+        try {
+            $currentPath = $this->_objectManager->get(Media::class)->getCurrentPath();
             return $this->storage->uploadFile($currentPath);
-        } else {
-            $this->messageManager->addErrorMessage(__('Directory %1 is not under storage root path.', $currentPath));
+        } catch (Exception $e) {
+            $this->messageManager->addErrorMessage($e->getMessage());
             return false;
         }
     }

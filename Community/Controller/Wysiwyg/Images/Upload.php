@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace DaoNguyen\Community\Controller\Wysiwyg\Images;
 
 use DaoNguyen\Community\Helper\Media;
-use DaoNguyen\Community\Model\Media\Storage;
+use DaoNguyen\Community\Model\Member\Gallery\Storage;
 use Exception;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\Result\Json;

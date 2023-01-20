@@ -70,5 +70,45 @@
             "COMMUNITY_POST_MEMBER_ID_COMMUNITY_MEMBER_ENTITY_ID": true,
             "COMMUNITY_POST_GROUP_ID_COMMUNITY_GROUP_ENTITY_ID": true
         }
+    },
+    "community_media": {
+        "column": {
+            "value_id": true,
+            "member_id": true,
+            "type": true,
+            "path": true,
+            "title": true,
+            "description": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "COMMUNITY_MEDIA_MEMBER_ID_COMMUNITY_MEMBER_ENTITY_ID": true
+        }
+    },
+    "community_media_group": {
+        "column": {
+            "link_id": true,
+            "group_id": true,
+            "value_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "COMMUNITY_MEDIA_GROUP_GROUP_ID_COMMUNITY_GROUP_ENTITY_ID": true,
+            "COMMUNITY_MEDIA_GROUP_VALUE_ID_COMMUNITY_MEDIA_VALUE_ID": true,
+            "COMMUNITY_MEDIA_GROUP_GROUP_ID_VALUE_ID": true
+        }
+    },
+    "community_media_post": {
+        "column": {
+            "link_id": true,
+            "post_id": true,
+            "value_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "COMMUNITY_MEDIA_POST_POST_ID_COMMUNITY_POST_ENTITY_ID": true,
+            "COMMUNITY_MEDIA_POST_VALUE_ID_COMMUNITY_MEDIA_VALUE_ID": true,
+            "COMMUNITY_MEDIA_POST_POST_ID_VALUE_ID": true
+        }
     }
 }

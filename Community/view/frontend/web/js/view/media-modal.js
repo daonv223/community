@@ -110,10 +110,21 @@ define([
                         action: 'saveImage'
                     }]
             });
+
+            this.loadFileList();
         },
 
         loadFileList: function () {
-
+            let contentBlock = this.element.find('#contents');
+            return $.ajax({
+                url: this.options.contentsUrl,
+                type: 'GET',
+                dataType: 'html',
+                context: contentBlock,
+                showLoader: true
+            }).done(function (data) {
+                contentBlock.html(data).trigger('contentUpdated');
+            });
         }
     });
 

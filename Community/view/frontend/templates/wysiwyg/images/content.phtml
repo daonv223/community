@@ -19,12 +19,13 @@ use DaoNguyen\Community\Block\Wysiwyg\Images\Content;
 </div>
 <script type="text/x-magento-init">
     {
-        ".uploader": {
+        ".media-gallery-modal": {
             "DaoNguyen_Community/js/view/media-modal": {
                 "maxFileSize": 104857600,
                 "maxWidth": 1920,
                 "maxHeight": 1200,
-                "isResizeEnabled": 1
+                "isResizeEnabled": 1,
+                "contentsUrl": "<?= $block->getUrl('community/wysiwyg_images/contents') ?>"
             }
         }
     }
