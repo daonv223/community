@@ -6,11 +6,13 @@ namespace DaoNguyen\Community\Controller\Member;
 use DaoNguyen\Community\Model\Session;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\Controller\Result\RedirectFactory;
-use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Exception\SessionException;
 use Magento\Framework\Message\Manager;
 
-class Join implements MemberRegistrationInterface, HttpPostActionInterface
+class Join implements HttpPostActionInterface
 {
     /**
      * @var RedirectFactory
@@ -53,16 +55,19 @@ class Join implements MemberRegistrationInterface, HttpPostActionInterface
     /**
      * @inheritdoc
      */
-    public function execute()
+    public function execute(): Redirect
     {
-        $groupId = $this->request->getParam('group_id');
-        if ($groupId) {
-            try {
-                $this->session->getCurrentMember()->joinGroups([$groupId]);
-                $this->messageManager->addSuccessMessage('You joined this group successfully.');
-            } catch (LocalizedException $e) {
-                $this->messageManager->addErrorMessage($e->getMessage());
-            }
+        try {
+            $currentMember = $this->session->getCurrentMember();
+            $groupId = $this->request->getParam('group_id');
+            $currentMember->joinGroups([$groupId]);
+            $this->messageManager->addSuccessMessage('You joined this group successfully.');
+        } catch (NoSuchEntityException $e) {
+            $this->messageManager->addErrorMessage($e->getMessage());
+            return $this->redirectFactory->create()->setPath('community/member');
+        } catch (SessionException $e) {
+            $this->messageManager->addErrorMessage($e->getMessage());
+            return $this->redirectFactory->create()->setPath('customer/account/login');
         }
         return $this->redirectFactory->create()->setPath('community/group/all');
     }

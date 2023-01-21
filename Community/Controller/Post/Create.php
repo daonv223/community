@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace DaoNguyen\Community\Controller\Post;
 
+use DaoNguyen\Community\Controller\Member\MemberRegistrationInterface;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
-class Create implements HttpGetActionInterface
+class Create implements HttpGetActionInterface, MemberRegistrationInterface
 {
     /**
      * @var PageFactory
@@ -25,9 +26,9 @@ class Create implements HttpGetActionInterface
     /**
      * Execute the request.
      *
-     * @return Page
+     * @return Page|null
      */
-    public function execute()
+    public function execute(): ?Page
     {
         return $this->pageFactory->create();
     }

@@ -81,7 +81,7 @@ class Editor implements ArgumentInterface
             'activeEditorPath' => 'mage/adminhtml/wysiwyg/tiny_mce/tinymce5Adapter',
             'tinymce' => [
                 'toolbar' => "undo redo | styleselect | fontsizeselect | lineheight | forecolor backcolor | bold italic underline | alignleft aligncenter alignright | numlist bullist | link image table charmap",
-                'plugins' => 'advlist autolink lists link charmap media noneditable table paste code help table image',
+                'plugins' => 'advlist autolink lists link charmap media noneditable table paste code help table image textpattern',
                 'content_css' => [
                     $this->assetRepo->getUrl('mage/adminhtml/wysiwyg/tiny_mce/themes/ui.css')
                 ]
@@ -127,6 +127,9 @@ class Editor implements ArgumentInterface
                         'title' => 'Preformatted',
                         'block' => 'pre'
                     ]
+                ],
+                'textpattern_patterns' => [
+                    ['start' => '@', 'end' => '@', 'cmd' => 'getProductBlock']
                 ]
             ]
         ];

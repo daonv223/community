@@ -153,4 +153,47 @@
             margin-bottom: 25px;
         }
     }
+
+    .media-gallery-modal {
+        .gallery {
+            margin-top: 30px;
+
+            .image-container {
+                border: 1px solid #adadad;
+                cursor: pointer;
+                display: inline-block;
+                margin: 0 0.5rem 15px 0;
+                overflow: hidden;
+                padding: 3px;
+                text-overflow: ellipsis;
+                width: 100px;
+
+                image {
+                    min-height: 72px;
+                    text-align: center;
+                }
+            }
+
+            .image-container.selected {
+                border-color: #008bdb;
+            }
+        }
+
+        .actions {
+            padding: 10px;
+            margin-bottom: 20px;
+            background: #f8f8f8;
+            border-bottom: 1px solid #e3e3e3;
+            border-top: 1px solid #e3e3e3;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+
+            .no-display {
+                display: none;
+            }
+        }
+    }
 }

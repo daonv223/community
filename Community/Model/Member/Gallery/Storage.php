@@ -6,7 +6,6 @@ namespace DaoNguyen\Community\Model\Member\Gallery;
 use DaoNguyen\Community\Model\Member\Media\UploaderFactory;
 use Exception;
 use Magento\Framework\App\Filesystem\DirectoryList;
-use Magento\Framework\Data\Collection;
 use Magento\Framework\Data\Collection\Filesystem;
 use Magento\Framework\Data\Collection\FilesystemFactory;
 use Magento\Framework\Exception\LocalizedException;
@@ -78,11 +77,7 @@ class Storage
         $collection
             ->addTargetDir($path)
             ->setCollectFiles($collectFiles)
-            ->setCollectRecursively(false)
-            ->setOrder(
-                'mtime',
-                Collection::SORT_ORDER_ASC
-            );
+            ->setCollectRecursively(false);
         return $collection;
     }
 

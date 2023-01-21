@@ -3,6 +3,16 @@ use DaoNguyen\Community\Block\Wysiwyg\Images\Content;
 /** @var Content $block */
 ?>
 <div class="media-gallery-modal">
+    <div class="actions">
+        <div class="action-buttons">
+            <button id="cancel" title="Cancel" type="button" class="action-default action-quaternary" onclick="MediabrowserUtility.closeDialog()">
+                <span>Cancel</span>
+            </button>
+            <button id="insert_images" title="Add Selected" type="button" class="action-default save no-display action-primary">
+                <span>Add Selected</span>
+            </button>
+        </div>
+    </div>
     <div class="main-col">
         <div id="contents-uploader" class="contents-uploader">
             <div id="uploader" class="uploader">

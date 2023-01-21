@@ -5,10 +5,8 @@ namespace DaoNguyen\Community\Model;
 
 use DaoNguyen\Community\Api\Data\MemberInterface;
 use DaoNguyen\Community\Api\MemberRepositoryInterface;
-use Exception;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Response\Http;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\SessionException;
 use Magento\Framework\UrlFactory;
@@ -77,20 +75,17 @@ class Session
     public function authenticate(): bool
     {
         try {
-            $result = $this->customerSession->authenticate();
-            $this->customerSession->setBeforeAuthUrl($this->urlFactory->create()->getUrl('community'));
-            if ($result) {
-                $currentMember = $this->getCurrentMember();
-                if (!$currentMember->getId()) {
-                    $this->response->setRedirect(
-                        $this->urlFactory->create()->getUrl('community/member')
-                    );
-                } else {
-                    return true;
-                }
+            if ($this->customerSession->authenticate() && $this->getCurrentMember()) {
+                return true;
+            } else {
+                return false;
             }
+        } catch (SessionException) {
             return false;
-        } catch (Exception) {
+        } catch (NoSuchEntityException) {
+            $this->response->setRedirect(
+                $this->urlFactory->create()->getUrl('community/member')
+            );
             return false;
         }
     }

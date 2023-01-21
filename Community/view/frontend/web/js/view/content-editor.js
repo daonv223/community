@@ -1,7 +1,8 @@
 define([
     'jquery',
     'uiComponent',
-    'mage/adminhtml/wysiwyg/tiny_mce/setup'
+    'mage/adminhtml/wysiwyg/tiny_mce/setup',
+    'DaoNguyen_Community/js/setupTinyMce'
 ], function ($, Component) {
     'use strict';
 

@@ -1,4 +1,21 @@
 <?php
 /** @var \DaoNguyen\Community\Block\Wysiwyg\Images\Files $block */
 ?>
-<p><?= $block->getFilesCount() ?></p>
+<?php if ($block->getFilesCount()): ?>
+    <div class="gallery">
+    <?php foreach ($block->getFiles() as $file): ?>
+        <?php
+            $src = $block->getFileUrl($file);
+            $basename = $file['basename']
+        ?>
+        <div class="image-container" data-row="image">
+            <div class="image">
+                <img src="<?= $block->escapeHtmlAttr($src) ?>" alt="<?= $block->escapeHtmlAttr($basename) ?>">
+            </div>
+            <small><?= $block->escapeHtml($basename) ?></small>
+        </div>
+    <?php endforeach; ?>
+    </div>
+<?php else: ?>
+    <div class="empty"><?= $block->escapeHtml(__('No files found')) ?></div>
+<?php endif; ?>
