@@ -1,0 +1,17 @@
+.product-info {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.product-info .product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.price {
+    font-weight: 700;
+    white-space: nowrap;
+    font-size: 1.4rem;
+}

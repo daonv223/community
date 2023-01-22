@@ -83,7 +83,8 @@ class Editor implements ArgumentInterface
                 'toolbar' => "undo redo | styleselect | fontsizeselect | lineheight | forecolor backcolor | bold italic underline | alignleft aligncenter alignright | numlist bullist | link image table charmap",
                 'plugins' => 'advlist autolink lists link charmap media noneditable table paste code help table image textpattern',
                 'content_css' => [
-                    $this->assetRepo->getUrl('mage/adminhtml/wysiwyg/tiny_mce/themes/ui.css')
+                    $this->assetRepo->getUrl('mage/adminhtml/wysiwyg/tiny_mce/themes/ui.css'),
+                    $this->assetRepo->getUrlWithParams('DaoNguyen_Community::css/community-wysiwyg.css', [])
                 ]
             ],
             'settings' => [

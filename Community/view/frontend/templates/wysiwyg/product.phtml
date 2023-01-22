@@ -1,0 +1,23 @@
+<?php
+/**
+ * @var \DaoNguyen\Community\Block\Wysiwyg\ProductInfo $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Magento\Catalog\Model\Product $product
+ */
+$product = $block->getProduct();
+$outputHelper = $block->getHelper();
+?>
+<div class="product-info">
+    <div class="product-image">
+        <img src="<?= $block->getImageUrl($product) ?>" alt="Image">
+    </div>
+    <div class="product-details">
+        <strong class="product-name">
+            <a class="product-item-link"
+               href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>">
+                <?= $outputHelper->productAttribute($product, $product->getName(), 'name') ?>
+            </a>
+        </strong>
+        <?= $block->getProductPrice($product) ?>
+    </div>
+</div>
