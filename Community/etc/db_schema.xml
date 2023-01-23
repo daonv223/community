@@ -64,7 +64,7 @@
         <column name="subject" xsi:type="varchar" length="256" nullable="false" comment="Post Subject"/>
         <column name="content" xsi:type="text" nullable="false" comment="Post Content"/>
         <column name="status" xsi:type="tinyint" unsigned="true" nullable="false" default="1" comment="Post Status"/>
-        <column name="is_subscribed" xsi:type="tinyint" unsigned="true" nullable="false" default="1" comment="Is Author Subscribed"/>
+        <column name="is_subscribed" xsi:type="tinyint" unsigned="true" nullable="false" default="0" comment="Is Author Subscribed"/>
         <column name="views" xsi:type="int" unsigned="true" nullable="false" default="0" comment="Post Views"/>
         <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
         <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
@@ -132,4 +132,18 @@
             <column name="value_id"/>
         </constraint>
     </table>
+    <table name="community_associated_product" resource="default" engine="innodb" comment="Community Associated Product">
+        <column name="link_id" xsi:type="int" unsigned="true" nullable="false" identity="true" comment="Link ID"/>
+        <column name="post_id" xsi:type="int" unsigned="true" nullable="false" comment="Post ID"/>
+        <column name="product_id" xsi:type="int" unsigned="true" nullable="false" comment="Product ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="link_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_ASSOCIATED_PRODUCT_POST_ID_COMMUNITY_POST_ENTITY_ID"
+                    table="community_associated_product" column="post_id" referenceTable="community_post" referenceColumn="entity_id"/>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_ASSOCIATED_PRODUCT_PRODUCT_ID_CATALOG_PRODUCT_ENTITY_ENTITY_ID"
+                    table="community_associated_product" column="product_id"
+                    referenceTable="catalog_product_entity" referenceColumn="entity_id"/>
+    </table>
 </schema>
+

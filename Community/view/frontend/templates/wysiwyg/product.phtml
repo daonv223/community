@@ -7,7 +7,7 @@
 $product = $block->getProduct();
 $outputHelper = $block->getHelper();
 ?>
-<div class="product-info">
+<div class="product-info" data-product-id="<?= $product->getEntityId() ?>">
     <div class="product-image">
         <img src="<?= $block->getImageUrl($product) ?>" alt="Image">
     </div>

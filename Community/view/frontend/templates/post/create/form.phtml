@@ -6,6 +6,7 @@ use DaoNguyen\Community\Block\Post\Create\Form;
  */
 ?>
 <form method="post"
+      action="<?= $block->getUrl('community/post/save') ?>"
       class="create-post-form"
       id="create-post-form"
       data-mage-init='{"validation": {}}'

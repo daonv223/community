@@ -125,4 +125,14 @@ class Group extends AbstractModel implements IdentityInterface
     {
         return (int) parent::getEntityId();
     }
+
+    /**
+     * Get auto approve.
+     *
+     * @return int
+     */
+    public function getAutoApprove(): int
+    {
+        return (int) $this->getData('auto_approve');
+    }
 }
