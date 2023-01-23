@@ -1,8 +1,16 @@
 <?php
 use DaoNguyen\Community\Block\Post\Create\Form;
-/** @var Form $block */
+/**
+ * @var Form $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
 ?>
-<form method="post" class="create-post-form" id="create-post-form">
+<form method="post"
+      class="create-post-form"
+      id="create-post-form"
+      data-mage-init='{"validation": {}}'
+      autocomplete="off"
+      enctype="multipart/form-data">
     <?= $block->getBlockHtml('formkey') ?>
     <fieldset class="fieldset create-post-form-fieldset" data-hasrequired="<?= $block->escapeHtmlAttr('* Required Fields') ?>">
         <div class="field subject-field required">
@@ -14,7 +22,7 @@ use DaoNguyen\Community\Block\Post\Create\Form;
         <div class="field group-field required">
             <label for="group_id" class="label"><span><?= $block->escapeHtml(__('Group')) ?></span></label>
             <div class="control">
-                <select id="group_id" name="group_id" class="input-select">
+                <select id="group_id" name="group_id" class="input-select" data-validate="{required: true}">
                     <?php foreach ($block->toOptionArray() as $option): ?>
                         <option value="<?= $block->escapeHtmlAttr($option['value']) ?>">
                             <?= $block->escapeHtml($option['label']) ?>
@@ -28,9 +36,10 @@ use DaoNguyen\Community\Block\Post\Create\Form;
             <div class="control">
                 <textarea id="content_editor" name="content"></textarea>
             </div>
+            <p class="note"><?= $escaper->escapeHtml('To display product content, surround a sku product with @.') ?></p>
         </div>
         <div class="field is_subscribed-field">
-            <input type="checkbox" name="is_subscribed" id="is_subscribed" checked title="<?= $block->escapeHtmlAttr(__('Email me when someone replies')) ?>" class="checkbox" />
+            <input type="checkbox" name="is_subscribed" id="is_subscribed" value="1" checked title="<?= $block->escapeHtmlAttr(__('Email me when someone replies')) ?>" class="checkbox" />
             <label class="label" for="is_subscribed"><span><?= $block->escapeHtml(__('Email me when someone replied')) ?></span></label>
         </div>
     </fieldset>
