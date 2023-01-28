@@ -217,6 +217,17 @@
                 margin-bottom: 10px;
                 border-bottom: 1px solid #b1b1b1;
             }
+
+            .action {
+                display: flex;
+                gap: 20px;
+                align-items: center;
+
+                a {
+                    color: black;
+                    text-decoration: none;
+                }
+            }
         }
 
         .post-author {
@@ -231,5 +242,38 @@
                 object-fit: cover;
             }
         }
+    }
+
+    .kudos-button:before {
+        content: "";
+        background-image: url("../DaoNguyen_Community/images/love.svg");
+        display: inline-block;
+        width: 28px;
+        height: 24px;
+        cursor: pointer;
+        margin-bottom: -5px;
+        margin-right: 5px;
+    }
+
+    .kudos-button-filled:before {
+        content: "";
+        background-image: url("../DaoNguyen_Community/images/love_filled.svg");
+        display: inline-block;
+        width: 28px;
+        height: 24px;
+        cursor: pointer;
+        margin-bottom: -5px;
+        margin-right: 5px;
+    }
+
+    .reply:before {
+        content: "";
+        background-image: url("../DaoNguyen_Community/images/Reply.svg");
+        display: inline-block;
+        width: 26px;
+        height: 21px;
+        cursor: pointer;
+        margin-bottom: -5px;
+        margin-right: 5px;
     }
 }

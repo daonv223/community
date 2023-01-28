@@ -178,4 +178,50 @@ class Member extends AbstractModel implements MemberInterface
     {
         return $this->getData(MemberInterface::UUID);
     }
+
+    /**
+     * Is like post.
+     *
+     * @param int $postId
+     * @return bool
+     */
+    public function isLikedPost(int $postId): bool
+    {
+        $conn = $this->getResource()->getConnection();
+        $select = $conn->select()
+            ->from($conn->getTableName('community_post_reaction'))
+            ->where('member_id = ?', $this->getId())
+            ->where('post_id = ?', $postId);
+        return (bool) $conn->fetchRow($select);
+    }
+
+    /**
+     * Reaction post id.
+     *
+     * @param int $postId
+     * @return void
+     */
+    public function reaction(int $postId): void
+    {
+        $isLikedPost = $this->isLikedPost($postId);
+        $conn = $this->getResource()->getConnection();
+        $tableName = $conn->getTableName('community_post_reaction');
+        if (!$isLikedPost) {
+            $conn->insertMultiple(
+                $conn->getTableName($tableName),
+                [
+                    'member_id' => $this->getId(),
+                    'post_id' => $postId
+                ]
+            );
+        } else {
+            $conn->delete(
+                $tableName,
+                [
+                    'member_id' => $this->getId(),
+                    'post_id' => $postId
+                ]
+            );
+        }
+    }
 }

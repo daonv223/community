@@ -5,6 +5,10 @@ define([
     'use strict';
 
     return Component.extend({
+        defaults: {
+
+        },
+
         initialize: function () {
             this._super();
             this.member = customerData.get('member');

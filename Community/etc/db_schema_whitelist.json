@@ -110,5 +110,31 @@
             "COMMUNITY_MEDIA_POST_VALUE_ID_COMMUNITY_MEDIA_VALUE_ID": true,
             "COMMUNITY_MEDIA_POST_POST_ID_VALUE_ID": true
         }
+    },
+    "community_associated_product": {
+        "column": {
+            "link_id": true,
+            "post_id": true,
+            "product_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "COMMUNITY_ASSOCIATED_PRODUCT_POST_ID_COMMUNITY_POST_ENTITY_ID": true,
+            "COMMUNITY_ASSOCIATED_PRD_PRD_ID_CAT_PRD_ENTT_ENTT_ID": true,
+            "COMMUNITY_ASSOCIATED_PRODUCT_POST_ID_PRODUCT_ID": true
+        }
+    },
+    "community_post_reaction": {
+        "column": {
+            "link_id": true,
+            "member_id": true,
+            "post_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "COMMUNITY_POST_REACTION_MEMBER_ID_COMMUNITY_MEMBER_ENTITY_ID": true,
+            "COMMUNITY_POST_REACTION_POST_ID_COMMUNITY_POST_ENTITY_ID": true,
+            "COMMUNITY_POST_REACTION_MEMBER_ID_POST_ID": true
+        }
     }
 }

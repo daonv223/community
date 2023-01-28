@@ -4,7 +4,7 @@
 $post = $block->getPost();
 $member = $post->getMember()
 ?>
-<div class="post-content">
+<div class="post-content" xmlns="http://www.w3.org/1999/html">
     <div class="post-in">
         <span><?= $escaper->escapeHtml(__('Post In')) ?></span>
         <a href="#"><strong><?= $block->getGroupName() ?></strong></a>
@@ -27,4 +27,31 @@ $member = $post->getMember()
     <div class="content">
         <?= $post->getContent() ?>
     </div>
+    <div class="action">
+        <div class="kudos" data-bind="scope: 'kudos'">
+            <div data-bind="class: currentStatusClass, click: reaction">
+                <label>Kudos</label>
+            </div>
+        </div>
+        <a>
+            <div class="reply">
+                <label>Reply</label>
+            </div>
+        </a>
+    </div>
 </div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "kudos": {
+                        "component": "DaoNguyen_Community/js/view/kudos",
+                        "postId": "<?= $post->getEntityId() ?>"
+                    }
+                }
+            }
+        }
+    }
+</script>
