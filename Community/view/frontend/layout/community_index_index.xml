@@ -5,4 +5,11 @@
     <head>
         <title>Community Home</title>
     </head>
+    <body>
+        <referenceContainer name="content">
+            <block name="community.home" template="DaoNguyen_Community::home.phtml">
+                <block name="community.home.list" class="DaoNguyen\Community\Block\Post\ListProduct" template="DaoNguyen_Community::post/list.phtml"/>
+            </block>
+        </referenceContainer>
+    </body>
 </page>

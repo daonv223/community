@@ -1,0 +1,30 @@
+<?php
+/** @var \DaoNguyen\Community\Block\Post\View\PostView $block */
+/** @var \Magento\Framework\Escaper $escaper */
+$post = $block->getPost();
+$member = $post->getMember()
+?>
+<div class="post-content">
+    <div class="post-in">
+        <span><?= $escaper->escapeHtml(__('Post In')) ?></span>
+        <a href="#"><strong><?= $block->getGroupName() ?></strong></a>
+    </div>
+    <div class="post-time-details">
+        <span><?= $escaper->escapeHtml(__('Posted')) ?></span>
+        <span><?= $post->getCreatedAt() ?></span>
+        <span>|</span>
+        <span><?= $escaper->escapeHtml(__('Updated')) ?></span>
+        <span><?= $post->getUpdatedAt() ?></span>
+    </div>
+    <div class="post-author">
+        <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarAuthorUrl()) ?>" alt="avatar">
+        <div class="nickname"><?= $escaper->escapeHtml($member->getNickname()) ?></div>
+        <div class="badges"></div>
+    </div>
+    <div class="post-subject">
+        <h2><?= $post->getSubject() ?></h2>
+    </div>
+    <div class="content">
+        <?= $post->getContent() ?>
+    </div>
+</div>

@@ -75,11 +75,15 @@ class MemberRepository implements MemberRepositoryInterface
      *
      * @param int $memberId
      * @return MemberInterface
+     * @throws NoSuchEntityException
      */
     public function getById(int $memberId): MemberInterface
     {
         $member = $this->memberInterfaceFactory->create();
         $this->memberResource->load($member, $memberId);
+        if (!$member->getId()) {
+            throw new NoSuchEntityException(__('The member with the "%1" customer id doesn\'t exist.', $memberId));
+        }
         return $member;
     }
 }

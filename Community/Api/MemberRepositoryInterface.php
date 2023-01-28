@@ -24,6 +24,7 @@ interface MemberRepositoryInterface
      *
      * @param int $memberId
      * @return MemberInterface
+     * @throw NoSuchEntityException
      */
     public function getById(int $memberId): MemberInterface;
 
