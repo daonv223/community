@@ -203,6 +203,9 @@
         border-radius: 5px;
 
         .post-content {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #b1b1b1;
+
             .post-in {
                 margin-bottom: 10px;
             }
@@ -211,11 +214,6 @@
                 font-size: 12px;
                 color: #666666;
                 margin-bottom: 10px;
-            }
-
-            .content {
-                margin-bottom: 10px;
-                border-bottom: 1px solid #b1b1b1;
             }
 
             .action {
@@ -227,11 +225,13 @@
                     color: black;
                     text-decoration: none;
                 }
+
+                margin-bottom: 20px;
             }
         }
     }
 
-    .post-author {
+    .author {
         display: flex;
         gap: 10px;
         align-items: center;
@@ -298,6 +298,29 @@
                 font-size: 12px;
                 color: #666666;
                 margin-bottom: 10px;
+            }
+        }
+    }
+
+    .comment-view-wrapper {
+        padding: 10px;
+
+        .comment {
+            padding-bottom: 10px;
+            border-bottom: 1px solid #b1b1b1;
+
+            .header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 15px;
+            }
+
+            .footer {
+                a {
+                    color: black;
+                    text-decoration: none;
+                }
             }
         }
     }

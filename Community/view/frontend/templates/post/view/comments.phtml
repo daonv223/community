@@ -1,0 +1,6 @@
+<?php
+$comment = \Magento\Framework\App\ObjectManager::getInstance()->create(\DaoNguyen\Community\Model\CommentRepository::class)->getById(1);
+$block = \Magento\Framework\App\ObjectManager::getInstance()->create(\DaoNguyen\Community\Block\Post\Comment\View::class);
+$block->setComment($comment);
+?>
+<?= $block->toHtml() ?>

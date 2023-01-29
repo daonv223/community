@@ -6,6 +6,7 @@ namespace DaoNguyen\Community\Model;
 use DaoNguyen\Community\Api\MemberRepositoryInterface;
 use DaoNguyen\Community\Model\ResourceModel\Comment as ResourceModel;
 use Magento\Framework\Data\Collection\AbstractDb;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\Context;
 use Magento\Framework\Model\ResourceModel\AbstractResource;
@@ -15,6 +16,7 @@ class Comment extends AbstractModel
 {
     public const MEMBER_ID = 'member_id';
     public const CONTENT = 'content';
+    public const POST_ID = 'post_id';
 
     /**
      * @var string
@@ -90,6 +92,7 @@ class Comment extends AbstractModel
      * Retrieve author of post.
      *
      * @return Member
+     * @throws NoSuchEntityException
      */
     public function getMember(): Member
     {
@@ -130,5 +133,15 @@ class Comment extends AbstractModel
     public function getUpdatedAt(): ?string
     {
         return $this->getData('updated_at');
+    }
+
+    /**
+     * Retrieve post id.
+     *
+     * @return int
+     */
+    public function getPostId(): int
+    {
+        return (int) $this->getData(self::POST_ID);
     }
 }

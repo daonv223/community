@@ -16,7 +16,7 @@ $member = $post->getMember()
         <span><?= $escaper->escapeHtml(__('Updated')) ?></span>
         <span><?= $post->getUpdatedAt() ?></span>
     </div>
-    <div class="post-author">
+    <div class="author">
         <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarAuthorUrl()) ?>" alt="avatar">
         <div class="nickname"><?= $escaper->escapeHtml($member->getNickname()) ?></div>
         <div class="badges"></div>

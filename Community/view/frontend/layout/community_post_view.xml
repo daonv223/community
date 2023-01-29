@@ -10,6 +10,7 @@
         <referenceContainer name="content">
             <container name="community.post" htmlClass="community-post" htmlTag="div">
                 <block name="community.post.content" template="DaoNguyen_Community::post/view/content.phtml" class="DaoNguyen\Community\Block\Post\View\PostView"/>
+                <block name="community.post.comments" template="DaoNguyen_Community::post/view/comments.phtml"/>
             </container>
         </referenceContainer>
     </body>
