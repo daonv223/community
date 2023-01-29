@@ -136,5 +136,22 @@
             "COMMUNITY_POST_REACTION_POST_ID_COMMUNITY_POST_ENTITY_ID": true,
             "COMMUNITY_POST_REACTION_MEMBER_ID_POST_ID": true
         }
+    },
+    "community_comment": {
+        "column": {
+            "entity_id": true,
+            "post_id": true,
+            "member_id": true,
+            "parent_id": true,
+            "content": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "COMMUNITY_COMMENT_POST_ID_COMMUNITY_POST_ENTITY_ID": true,
+            "COMMUNITY_COMMENT_MEMBER_ID_COMMUNITY_MEMBER_ENTITY_ID": true,
+            "COMMUNITY_COMMENT_PARENT_ID_COMMUNITY_COMMENT_ENTITY_ID": true
+        }
     }
 }

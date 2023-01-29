@@ -15,7 +15,7 @@ class PostView extends Template
     /**
      * @var Registry
      */
-    private Registry $registry;
+    protected Registry $registry;
 
     /**
      * @var MemberHelper

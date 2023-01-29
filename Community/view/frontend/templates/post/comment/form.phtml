@@ -1,0 +1,53 @@
+<?php
+/** @var \DaoNguyen\Community\Block\Post\Comment\Form $block */
+/** @var \Magento\Framework\Escaper $escaper */
+$comment = $block->getParentComment();
+?>
+<div class="title">
+    <h2>Reply to Post</h2>
+</div>
+<form method="post"
+      action="<?= $block->getUrl('community/post/comment_save') ?>"
+      class="create-comment-form"
+      id="create-comment-form"
+      autocomplete="off"
+      enctype="multipart/form-data">
+    <?= $block->getBlockHtml('formkey') ?>
+    <input type="hidden" id="post_id" name="post_id" value="<?= $block->getPost()->getEntityId() ?>" />
+    <?php if ($comment !== null): ?>
+        <input type="hidden" id="parent_id" name="parent_id" value="<?= $comment->getEntityId() ?>" />
+    <?php endif; ?>
+    <fieldset class="fieldset create-comment-form-fieldset" data-hasrequired="<?= $escaper->escapeHtmlAttr('* Required Fields') ?>">
+        <div class="field content-field required" data-bind="scope: 'content-editor'">
+            <label for="content_editor" class="label"><span><?= $escaper->escapeHtml('Content') ?></span></label>
+            <div class="control">
+                <textarea id="content_editor" name="content"></textarea>
+            </div>
+            <p class="note"><?= $escaper->escapeHtml('To display product content, surround a sku product with @.') ?></p>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar create-comment-form-actions">
+        <div class="message info note">
+            <div><?= $escaper->escapeHtml('By clicking "Post," you agree to this community guidelines and Terms of Use. Please make sure there\'s no inappropriate language, personal contact info, or non-Community URLs in your comment.') ?></div>
+        </div>
+        <div class="primary actions-primary">
+            <button type="submit" class="action submit primary"><span><?= $block->escapeHtml(__('Post')) ?></span></button>
+        </div>
+    </div>
+</form>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "content-editor": {
+                        "component": "DaoNguyen_Community/js/view/content-editor",
+                        "config": {
+                            "editorConfig": <?= $block->getEditor()->getConfig() ?>
+                        }
+                    }
+                }
+            }
+        }
+    }
+</script>

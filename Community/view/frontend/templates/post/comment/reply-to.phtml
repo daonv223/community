@@ -1,0 +1,60 @@
+<?php
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \DaoNguyen\Community\Block\Post\Comment\ReplyTo $block */
+?>
+<div class="reply-to">
+    <div class="heading">
+        <strong><?= $escaper->escapeHtml('Replying to:') ?></strong>
+    </div>
+    <div class="target">
+        <?php
+        $post = $block->getPost();
+        $comment = $block->getParentComment();
+        ?>
+        <?php if ($comment === null): ?>
+            <?php
+            $member = $post->getMember();
+            ?>
+            <div class="post-author">
+                <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarAuthorUrl()) ?>" alt="avatar">
+                <div class="nickname"><?= $escaper->escapeHtml($member->getNickname()) ?></div>
+                <div class="badges"></div>
+            </div>
+            <div class="post-time-details">
+                <span><?= $escaper->escapeHtml(__('Posted')) ?></span>
+                <span><?= $post->getCreatedAt() ?></span>
+                <span>|</span>
+                <span><?= $escaper->escapeHtml(__('Updated')) ?></span>
+                <span><?= $post->getUpdatedAt() ?></span>
+            </div>
+            <div class="subject">
+                <h2><span><?= $escaper->escapeHtml(__('Re:'))?></span><span><?= $escaper->escapeHtml($post->getSubject()) ?></span></h2>
+            </div>
+            <div class="content">
+                <?= $post->getContent() ?>
+            </div>
+        <?php else: ?>
+            <?php
+            $member = $comment->getMember();
+            ?>
+            <div class="post-author">
+                <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarAuthorUrl()) ?>" alt="avatar">
+                <div class="nickname"><?= $escaper->escapeHtml($member->getNickname()) ?></div>
+                <div class="badges"></div>
+            </div>
+            <div class="post-time-details">
+                <span><?= $escaper->escapeHtml(__('Posted')) ?></span>
+                <span><?= $comment->getCreatedAt() ?></span>
+                <span>|</span>
+                <span><?= $escaper->escapeHtml(__('Updated')) ?></span>
+                <span><?= $comment->getUpdatedAt() ?></span>
+            </div>
+            <div class="subject">
+                <h2><span><?= $escaper->escapeHtml(__('Re: '))?></span><span><?= $escaper->escapeHtml($post->getSubject()) ?></span></h2>
+            </div>
+            <div class="content">
+                <?= $comment->getContent() ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>

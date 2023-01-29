@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="community"/>
+    <head>
+        <title>Reply to Post</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block name="community.post.comment.form" template="DaoNguyen_Community::post/comment/form.phtml" class="DaoNguyen\Community\Block\Post\Comment\Form">
+                <arguments>
+                    <argument name="editor" xsi:type="object">DaoNguyen\Community\ViewModel\Editor</argument>
+                </arguments>
+            </block>
+            <block name="community.post.comment.reply.to" template="DaoNguyen_Community::post/comment/reply-to.phtml" class="DaoNguyen\Community\Block\Post\Comment\ReplyTo"/>
+        </referenceContainer>
+    </body>
+</page>

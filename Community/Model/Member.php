@@ -224,4 +224,14 @@ class Member extends AbstractModel implements MemberInterface
             );
         }
     }
+
+    /**
+     * Get entity id of this model.
+     *
+     * @return int
+     */
+    public function getEntityId(): int
+    {
+        return (int) $this->getData('entity_id');
+    }
 }

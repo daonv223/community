@@ -11,7 +11,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\File\Mime;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\Directory\WriteInterface;
-use Magento\Framework\Filesystem\ExtendedDriverInterface;
 use Magento\Ui\DataProvider\Modifier\PoolInterface;
 use Magento\Ui\DataProvider\ModifierPoolDataProvider;
 use DaoNguyen\Community\Model\ResourceModel\Group\CollectionFactory;
@@ -55,27 +54,28 @@ class DataProvider extends ModifierPoolDataProvider
      * @param GroupFactory $groupFactory
      * @param CollectionFactory $groupCollectionFactory
      * @param Filesystem $filesystem
-     * @param $name
-     * @param $primaryFieldName
-     * @param $requestFieldName
+     * @param Mime $mime
+     * @param string $name
+     * @param string $primaryFieldName
+     * @param string $requestFieldName
      * @param array $meta
      * @param array $data
      * @param PoolInterface|null $pool
      * @throws FileSystemException
      */
     public function __construct(
-        RequestInterface  $request,
-        GroupRepository   $groupRepository,
-        GroupFactory      $groupFactory,
+        RequestInterface $request,
+        GroupRepository $groupRepository,
+        GroupFactory $groupFactory,
         CollectionFactory $groupCollectionFactory,
-        Filesystem        $filesystem,
-                          Mime $mime,
-                          $name,
-                          $primaryFieldName,
-                          $requestFieldName,
-        array             $meta = [],
-        array             $data = [],
-        PoolInterface     $pool = null
+        Filesystem $filesystem,
+        Mime $mime,
+        $name,
+        $primaryFieldName,
+        $requestFieldName,
+        array $meta = [],
+        array $data = [],
+        PoolInterface $pool = null
     ) {
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data, $pool);
         $this->collection = $groupCollectionFactory->create();

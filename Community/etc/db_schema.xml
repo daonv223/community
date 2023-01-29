@@ -167,5 +167,25 @@
             <column name="post_id"/>
         </constraint>
     </table>
+    <table name="community_comment" resource="default" engine="innodb" comment="Community Post Comment">
+        <column name="entity_id" xsi:type="int" unsigned="true" nullable="false" identity="true" comment="Entity ID"/>
+        <column name="post_id" xsi:type="int" unsigned="true" nullable="false" comment="Post ID"/>
+        <column name="member_id" xsi:type="int" unsigned="true" nullable="false" comment="Member ID"/>
+        <column name="parent_id" xsi:type="int" unsigned="true" nullable="true" comment="Parent ID"/>
+        <column name="content" xsi:type="text" nullable="false" comment="Comment Content"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Creation Time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Update Time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_COMMENT_POST_ID_COMMUNITY_POST_ENTITY_ID"
+                    table="community_comment" column="post_id" referenceTable="community_post" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_COMMENT_MEMBER_ID_COMMUNITY_MEMBER_ENTITY_ID"
+                    table="community_comment" column="member_id" referenceTable="community_member" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_COMMENT_PARENT_ID_COMMUNITY_COMMENT_ENTITY_ID"
+                    table="community_comment" column="parent_id" referenceTable="community_comment" referenceColumn="entity_id"/>
+    </table>
 </schema>
 

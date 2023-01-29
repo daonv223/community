@@ -30,12 +30,12 @@ $member = $post->getMember()
     <div class="action">
         <div class="kudos" data-bind="scope: 'kudos'">
             <div data-bind="class: currentStatusClass, click: reaction">
-                <label>Kudos</label>
+                <label><?= $escaper->escapeHtml('Like') ?></label>
             </div>
         </div>
-        <a>
+        <a href="<?= $block->getUrl('community/post/comment_create', ['post_id' => $post->getEntityId()]) ?>">
             <div class="reply">
-                <label>Reply</label>
+                <label><?= $escaper->escapeHtml('Reply') ?></label>
             </div>
         </a>
     </div>
