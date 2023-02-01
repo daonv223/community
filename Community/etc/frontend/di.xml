@@ -11,4 +11,8 @@
             </argument>
         </arguments>
     </type>
+    <type name="Magento\Framework\App\FrontControllerInterface">
+        <plugin name="count_view_post"
+                type="DaoNguyen\Community\Plugin\CountViews"/>
+    </type>
 </config>

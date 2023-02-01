@@ -5,18 +5,24 @@ namespace DaoNguyen\Community\Model;
 
 use DaoNguyen\Community\Api\MemberRepositoryInterface;
 use DaoNguyen\Community\Model\ResourceModel\Comment as ResourceModel;
+use DaoNguyen\Community\Model\ResourceModel\Comment\CollectionFactory;
 use Magento\Framework\Data\Collection\AbstractDb;
+use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\Context;
 use Magento\Framework\Model\ResourceModel\AbstractResource;
 use Magento\Framework\Registry;
 
-class Comment extends AbstractModel
+class Comment extends AbstractModel implements IdentityInterface
 {
+    public const ENTITY_ID = 'entity_id';
     public const MEMBER_ID = 'member_id';
     public const CONTENT = 'content';
     public const POST_ID = 'post_id';
+    public const PARENT_ID = 'parent_id';
+    public const UPDATED_AT = 'updated_at';
+    public const CACHE_TAG = 'com_c';
 
     /**
      * @var string
@@ -29,7 +35,13 @@ class Comment extends AbstractModel
     private MemberRepositoryInterface $memberRepository;
 
     /**
+     * @var ResourceModel\CollectionFactory
+     */
+    private ResourceModel\CollectionFactory $collectionFactory;
+
+    /**
      * @param MemberRepositoryInterface $memberRepository
+     * @param CollectionFactory $collectionFactory
      * @param Context $context
      * @param Registry $registry
      * @param AbstractResource|null $resource
@@ -38,6 +50,7 @@ class Comment extends AbstractModel
      */
     public function __construct(
         MemberRepositoryInterface $memberRepository,
+        ResourceModel\CollectionFactory $collectionFactory,
         Context $context,
         Registry $registry,
         AbstractResource $resource = null,
@@ -46,6 +59,7 @@ class Comment extends AbstractModel
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
         $this->memberRepository = $memberRepository;
+        $this->collectionFactory = $collectionFactory;
     }
 
     /**
@@ -143,5 +157,45 @@ class Comment extends AbstractModel
     public function getPostId(): int
     {
         return (int) $this->getData(self::POST_ID);
+    }
+
+    /**
+     * Load all children.
+     *
+     * @return array
+     */
+    public function getChildren(): array
+    {
+        if ($this->getData('children') === null) {
+            $children = [];
+            $childrenCollection = $this->collectionFactory->create();
+            $childrenCollection->addFieldToFilter(self::PARENT_ID, ['eq' => $this->getEntityId()]);
+            foreach ($childrenCollection as $child) {
+                $children[] = $child;
+            }
+            $this->setData('children', $children);
+        }
+        return $this->getData('children');
+    }
+
+    public function getLevel(): int
+    {
+        return $this->getData('level');
+    }
+
+    public function setLevel(int $level): Comment
+    {
+        $this->setData('level', $level);
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @return string[]
+     */
+    public function getIdentities(): array
+    {
+        return [self::CACHE_TAG . '_' . $this->getEntityId(), self::CACHE_TAG, Post::CACHE_TAG . '_' . $this->getPostId()];
     }
 }

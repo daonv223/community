@@ -1,6 +1,19 @@
 <?php
-$comment = \Magento\Framework\App\ObjectManager::getInstance()->create(\DaoNguyen\Community\Model\CommentRepository::class)->getById(1);
-$block = \Magento\Framework\App\ObjectManager::getInstance()->create(\DaoNguyen\Community\Block\Post\Comment\View::class);
-$block->setComment($comment);
+/** @var \DaoNguyen\Community\Block\Post\View\Comments $block */
+$comments = $block->getCommentCollection();
 ?>
-<?= $block->toHtml() ?>
+<?php foreach ($comments as $comment): ?>
+    <?php
+    /** @var \DaoNguyen\Community\Model\Comment $comment */
+    $subComments = $block->getSubComments($comment);
+    ?>
+    <div class="comment-level-<?= $comment->getLevel() ?>">
+        <?= $block->renderComment($comment) ?>
+    </div>
+    <?php foreach ($subComments as $subComment): ?>
+        <div class="comment-level-<?= $subComment->getLevel() ?>">
+            <?= $block->renderComment($subComment) ?>
+        </div>
+    <?php endforeach; ?>
+<?php endforeach; ?>
+<?= $block->getPagerHtml() ?>

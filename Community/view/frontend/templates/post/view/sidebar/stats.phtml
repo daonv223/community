@@ -1,0 +1,22 @@
+<?php
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \DaoNguyen\Community\Block\Post\View\StatsBlock $block */
+$stats = $block->getStats();
+?>
+<div class="post-stats">
+    <div class="heading"><strong><?= $escaper->escapeHtml(__('Conversation Stats')) ?></strong></div>
+    <div class="content">
+        <div class="reply-count">
+            <strong><?= $escaper->escapeHtml($stats->getReplies()) ?></strong>&nbsp;<span><?= $escaper->escapeHtml(__('Replies')) ?></span>
+        </div>
+        <div class="view-count">
+            <strong><?= $escaper->escapeHtml($stats->getViews()) ?></strong>&nbsp;<span><?= $escaper->escapeHtml(__('Views')) ?></span>
+        </div>
+        <div class="heart-count">
+            <strong><?= $escaper->escapeHtml($stats->getHeartsGiver()) ?>&nbsp;</strong><span><?= $escaper->escapeHtml(__('Hearts Given')) ?></span>
+        </div>
+        <div class="contributor-count">
+            <strong><?= $escaper->escapeHtml($stats->getContributors()) ?>&nbsp;</strong><span><?= $escaper->escapeHtml(__('Contributors')) ?></span>
+        </div>
+    </div>
+</div>

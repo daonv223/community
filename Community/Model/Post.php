@@ -6,19 +6,22 @@ namespace DaoNguyen\Community\Model;
 use DaoNguyen\Community\Api\MemberRepositoryInterface;
 use DaoNguyen\Community\Model\ResourceModel\Post as ResourceModel;
 use Magento\Framework\Data\Collection\AbstractDb;
+use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\Context;
 use Magento\Framework\Model\ResourceModel\AbstractResource;
 use Magento\Framework\Registry;
 
-class Post extends AbstractModel
+class Post extends AbstractModel implements IdentityInterface
 {
     public const MEMBER_ID = 'member_id';
     public const STATUS = 'status';
     public const CONTENT = 'content';
+    public const VIEWS = 'views';
     public const APPROVED = 1;
     public const NOT_APPROVED = 0;
+    public const CACHE_TAG = 'com_p';
 
     /**
      * @var GroupRepository
@@ -88,6 +91,17 @@ class Post extends AbstractModel
     public function getMemberId(): int
     {
         return (int) $this->getData(self::MEMBER_ID);
+    }
+
+    public function setViews(int $views): Post
+    {
+        $this->getData(self::VIEWS, $views);
+        return $this;
+    }
+
+    public function getViews(): int
+    {
+        return (int) $this->getData(self::VIEWS);
     }
 
     /**
@@ -193,5 +207,15 @@ class Post extends AbstractModel
             $this->setData('member', $member);
         }
         return $this->getData('member');
+    }
+
+    /**
+     * @inheritdoc
+     *
+     * @return string[]
+     */
+    public function getIdentities(): array
+    {
+        return [self::CACHE_TAG . '_' . $this->getId(), self::CACHE_TAG];
     }
 }

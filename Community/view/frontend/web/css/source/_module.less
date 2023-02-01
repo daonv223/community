@@ -324,4 +324,81 @@
             }
         }
     }
+
+    .comment-level-1 {
+        padding-left: 5%;
+    }
+
+    .comment-level-2 {
+        padding-left: 10%;
+    }
+
+    .comment-level-3 {
+        padding-left: 15%;
+    }
+
+    .community-post-view {
+        .pager {
+            text-align: center;
+        }
+    }
+
+    .community-sidebar {
+        padding: 10px;
+        box-shadow: 0 0 5px #b1b1b1;
+        border-radius: 5px;
+        margin-bottom: 30px;
+    }
+
+    .post-stats {
+        .heading {
+            margin-bottom: 20px;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            .reply-count:before {
+                content: "";
+                background-image: url("../DaoNguyen_Community/images/Reply.svg");
+                display: inline-block;
+                width: 26px;
+                height: 21px;
+                margin-right: 5px;
+                margin-bottom: -5px;
+            }
+
+            .view-count:before {
+                content: "";
+                background-image: url("../DaoNguyen_Community/images/views.svg");
+                display: inline-block;
+                width: 26px;
+                height: 16px;
+                margin-right: 6px;
+                margin-bottom: -2px;
+            }
+
+            .heart-count:before {
+                content: "";
+                background-image: url("../DaoNguyen_Community/images/love.svg");
+                display: inline-block;
+                width: 28px;
+                height: 24px;
+                margin-right: 4px;
+                margin-bottom: -6px;
+            }
+
+            .contributor-count:before {
+                content: "";
+                background-image: url("../DaoNguyen_Community/images/contributor.svg");
+                display: inline-block;
+                width: 20px;
+                height: 19px;
+                margin-right: 12px;
+                margin-bottom: -3px;
+            }
+        }
+    }
 }

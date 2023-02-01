@@ -10,7 +10,15 @@
         <referenceContainer name="content">
             <container name="community.post" htmlClass="community-post" htmlTag="div">
                 <block name="community.post.content" template="DaoNguyen_Community::post/view/content.phtml" class="DaoNguyen\Community\Block\Post\View\PostView"/>
-                <block name="community.post.comments" template="DaoNguyen_Community::post/view/comments.phtml"/>
+                <block name="community.post.comments" template="DaoNguyen_Community::post/view/comments.phtml" class="DaoNguyen\Community\Block\Post\View\Comments">
+                    <block name="community.post.comment" class="DaoNguyen\Community\Block\Post\Comment\View"/>
+                    <block class="Magento\Theme\Block\Html\Pager" name="comments_pager"/>
+                </block>
+            </container>
+        </referenceContainer>
+        <referenceContainer name="sidebar.additional">
+            <container before="-" name="community.sidebar" htmlClass="community-sidebar" htmlTag="div">
+                <block name="community.post.sidebar.stats" template="DaoNguyen_Community::post/view/sidebar/stats.phtml" class="DaoNguyen\Community\Block\Post\View\StatsBlock" />
             </container>
         </referenceContainer>
     </body>
