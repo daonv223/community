@@ -27,7 +27,7 @@ $member = $post->getMember()
     <div class="content">
         <?= $post->getContent() ?>
     </div>
-    <div class="action">
+    <div class="actions">
         <div class="kudos" data-bind="scope: 'kudos'">
             <div data-bind="class: currentStatusClass, click: reaction">
                 <label><?= $escaper->escapeHtml('Like') ?></label>

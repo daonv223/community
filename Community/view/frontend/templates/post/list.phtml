@@ -1,1 +1,6 @@
-<h1>List Post</h1>
+<?php
+$post = \Magento\Framework\App\ObjectManager::getInstance()->create(\DaoNguyen\Community\Model\PostRepository::class)->getById(3);
+$preview = \Magento\Framework\App\ObjectManager::getInstance()->create(\DaoNguyen\Community\Block\Post\Preview::class);
+$preview->setPost($post);
+?>
+<?= $preview->toHtml() ?>
