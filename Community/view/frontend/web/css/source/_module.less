@@ -495,16 +495,25 @@
                 padding: 10px;
             }
         }
+    }
 
-        .post-sort-by {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            padding-top: 10px;
+    .post-orders {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding-top: 10px;
 
-            .option {
-                padding: 5px 0 5px 10px;
+        .order {
+            padding: 5px 0 5px 10px;
+
+            a {
+                color: black;
+                text-decoration: none;
             }
+        }
+
+        .order.current {
+            background-color: #e8e8e8;
         }
     }
 }

@@ -9,8 +9,12 @@
         <referenceContainer name="content">
             <block name="community.into" template="DaoNguyen_Community::intro.phtml"/>
             <block name="community.home" template="DaoNguyen_Community::home.phtml">
-                <block name="community.home.sort.by" template="DaoNguyen_Community::post/sort-by.phtml" />
-                <block name="community.home.list" class="DaoNguyen\Community\Block\Post\ListProduct" template="DaoNguyen_Community::post/list.phtml"/>
+                <block name="community.home.post.list.orders" template="DaoNguyen_Community::post/orders.phtml" class="DaoNguyen\Community\Block\Post\Orders">
+                    <arguments>
+                        <argument name="post_orders" xsi:type="object">DaoNguyen\Community\ViewModel\PostOrders</argument>
+                    </arguments>
+                </block>
+                <block name="community.home.post.list" class="DaoNguyen\Community\Block\Post\ListProduct" template="DaoNguyen_Community::post/list.phtml"/>
             </block>
         </referenceContainer>
     </body>

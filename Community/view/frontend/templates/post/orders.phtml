@@ -1,0 +1,14 @@
+<?php
+/** @var \DaoNguyen\Community\Block\Post\Orders $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<div class="post-orders">
+    <?php foreach ($block->getPostOrders()->getOrders() as $value => $label): ?>
+        <div class="order
+            <?php if ($block->isOrderCurrent($value)): ?>
+                current
+            <?php endif; ?>" data-order-value="<?= $escaper->escapeHtmlAttr($value) ?>">
+            <a href="<?= $block->getOrderLink($value) ?>"><?= $escaper->escapeHtml($label) ?></a>
+        </div>
+    <?php endforeach; ?>
+</div>
