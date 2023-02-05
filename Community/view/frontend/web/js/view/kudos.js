@@ -8,11 +8,8 @@ define([
     'use strict';
 
     return Component.extend({
-        defaults: {
-            isReaction: ko.observable(false)
-        },
-
         initialize: function () {
+            this.isReaction = ko.observable(false);
             let self = this;
             this._super();
             this.currentStatusClass = ko.pureComputed(function () {

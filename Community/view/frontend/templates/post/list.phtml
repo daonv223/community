@@ -1,6 +1,9 @@
 <?php
-$post = \Magento\Framework\App\ObjectManager::getInstance()->create(\DaoNguyen\Community\Model\PostRepository::class)->getById(3);
-$preview = \Magento\Framework\App\ObjectManager::getInstance()->create(\DaoNguyen\Community\Block\Post\Preview::class);
-$preview->setPost($post);
+/** @var \DaoNguyen\Community\Block\Post\ListPost $block */
 ?>
-<?= $preview->toHtml() ?>
+<div class="list-post">
+    <?php foreach ($block->getListPost() as $post): ?>
+    <?= $block->getPostPreviewHtml($post) ?>
+    <?php endforeach; ?>
+    <?= $block->getPagerHtml() ?>
+</div>

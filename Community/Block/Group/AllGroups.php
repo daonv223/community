@@ -51,7 +51,7 @@ class AllGroups extends Template implements IdentityInterface
     public function getAllGroups(): array
     {
         if (!$this->allGroups) {
-            $searchCriteria = $this->searchCriteriaBuilder->create();
+            $searchCriteria = $this->searchCriteriaBuilder->addFilter(Group::IS_ACTIVE, 1)->create();
             $this->allGroups = $this->groupRepository->getList($searchCriteria)->getItems();
         }
         return $this->allGroups;

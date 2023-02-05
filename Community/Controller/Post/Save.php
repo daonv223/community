@@ -102,6 +102,10 @@ class Save implements HttpPostActionInterface
             $currentMember = $this->memberSession->getCurrentMember();
             $post->setMemberId((int) $currentMember->getEntityId());
             $group = $this->groupRepository->getBydId((int) $data['group_id']);
+            if (!$group->isActive()) {
+                $this->messageManager->addErrorMessage('The group is not active!');
+                return $this->redirectFactory->create()->setPath('community');
+            }
             if ($group->getAutoApprove()) {
                 $post->setStatus(Post::APPROVED);
             } else {

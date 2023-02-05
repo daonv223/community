@@ -28,6 +28,7 @@ $recentComment = $block->getRecentComment();
         <div class="preview-content">
             <?= $block->truncate($post->getContent()) ?>
         </div>
+        <?php if($post->getData('replies')): ?>
         <div class="recent-comment-preview">
             <div class="recent-comment">
                 <div class="header">
@@ -43,11 +44,13 @@ $recentComment = $block->getRecentComment();
                 </div>
             </div>
         </div>
+        <?php endif; ?>
         <div class="recent-images">
 
         </div>
         <div class="actions">
-            <div class="kudos" data-bind="scope: 'kudos'">
+            <?php $scope = 'kudos' . $post->getEntityId()?>
+            <div class="kudos" data-bind="scope: '<?= $scope ?>'">
                 <div data-bind="class: currentStatusClass, click: reaction">
                     <label><?= $escaper->escapeHtml(__('Like')) ?></label>
                 </div>
@@ -57,6 +60,10 @@ $recentComment = $block->getRecentComment();
                     <label><?= $escaper->escapeHtml(__('Reply')) ?></label>
                 </div>
             </a>
+            <div class="replies-count">
+                <span><?= $escaper->escapeHtml($post->getData('replies')) ?></span>
+                <span><?= $escaper->escapeHtml(__('Replies')) ?></span>
+            </div>
         </div>
     </div>
 </div>
@@ -65,7 +72,7 @@ $recentComment = $block->getRecentComment();
         "*": {
             "Magento_Ui/js/core/app": {
                 "components": {
-                    "kudos": {
+                    "<?= $scope ?>": {
                         "component": "DaoNguyen_Community/js/view/kudos",
                         "postId": "<?= $post->getEntityId() ?>"
                     }

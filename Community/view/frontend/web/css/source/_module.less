@@ -218,7 +218,7 @@
 
             .actions {
                 display: flex;
-                gap: 20px;
+                gap: 15px;
                 align-items: center;
 
                 a {
@@ -460,13 +460,18 @@
 
             .actions {
                 display: flex;
-                gap: 20px;
+                gap: 15px;
                 align-items: center;
 
                 a {
                     color: black;
                     text-decoration: none;
                 }
+            }
+
+            .replies-count {
+                padding: 0 10px;
+                border-left: 2px solid #c4c4c4;
             }
         }
     }
@@ -495,6 +500,24 @@
                 padding: 10px;
             }
         }
+
+        .right-sidebar {
+            box-shadow: 0 0 5px #b1b1b1;
+            padding: 10px;
+            border-radius: 3px;
+
+            .attach-posts {
+                .content {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+
+                    a {
+                        color: black;
+                    }
+                }
+            }
+        }
     }
 
     .post-orders {
@@ -515,5 +538,93 @@
         .order.current {
             background-color: #e8e8e8;
         }
+    }
+
+    .list-post {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .pager {
+            text-align: center;
+        }
+    }
+
+    .community-index-index {
+        .community-intro {
+            margin-bottom: 15px;
+            overflow: hidden;
+
+            .left {
+                float: left;
+
+                .community-name {
+                    font-size: 30px;
+                    font-weight: 700;
+                    margin-bottom: 10px;
+                }
+
+                .community-description {
+                    font-size: 18px;
+                    line-height: 1.44;
+                    font-weight: 500;
+                }
+            }
+
+            .right {
+                float: right;
+                margin: 20px;
+
+                .community-post-search {
+                    padding: 6px;
+
+                    .post-search {
+                        display: flex;
+
+                        input {
+                            width: 400px;
+                        }
+                    }
+                }
+
+                .community-stats {
+                    display: flex;
+                    align-items: center;
+                    padding: 10px;
+
+                    .member-stats {
+                        padding-right: 15px;
+                        border-right: 1px solid #b1b1b1;
+                        position: relative;
+                        padding-left: 30px;
+
+                        .member-online {
+                            font-size: 12px;
+                            color: #069f0f;
+                        }
+                    }
+
+                    .member-stats:before {
+                        font-family: "FontAwesome";
+                        content: "\f0c0";
+                        position: absolute;
+                        left: 0;
+                    }
+
+                    .post-stats {
+                        padding-left: 40px;
+                        position: relative;
+                    }
+
+                    .post-stats:before {
+                        font-family: "FontAwesome";
+                        content: "\f075";
+                        position: absolute;
+                        left: 15px;
+                    }
+                }
+            }
+        }
+
     }
 }

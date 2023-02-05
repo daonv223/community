@@ -1,6 +1,39 @@
-<div class="intro">
-    <div>
-        <h2>Beauty Insider Community</h2>
-        <p>Ask questions, join challenges, and get <br> recommendations from people like you</p>
+<?php
+/** @var \DaoNguyen\Community\Block\Intro $block */
+/** @var \Magento\Framework\Escaper $escaper */
+$stats = $block->getCommunityStat();
+?>
+<div class="community-intro">
+    <div class="left">
+        <div class="community-name"><?= $block->getCommunityName() ?></div>
+        <div class="community-description">Ask questions, join challenges, and get <br> recommendations from people like you</div>
+    </div>
+    <div class="right">
+        <div class="community-post-search">
+            <form class="form post-search" method="get" action="<?= $block->getUrl('community/post/search') ?>">
+                <label class="label" for="search" style="display: none">
+                    <span><?= $escaper->escapeHtml(__('Search')) ?></span>
+                </label>
+                <input id="post-search"
+                       name="q"
+                       type="text"
+                       class="input-text"
+                       placeholder="<?= $escaper->escapeHtml('Search or ask a question') ?>"
+                       autocomplete="off"/>
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <div class="community-stats">
+            <div class="member-stats">
+                <div class="member-count">
+                    <strong><?= $escaper->escapeHtml($stats['memberCount']) ?></strong>
+                    <span>members</span>
+                </div>
+            </div>
+            <div class="post-stats">
+                <strong><?= $escaper->escapeHtml($stats['postCount']) ?></strong>
+                <span>posts</span>
+            </div>
+        </div>
     </div>
 </div>

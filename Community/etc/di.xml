@@ -3,6 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="DaoNguyen\Community\Api\Data\MemberInterface" type="DaoNguyen\Community\Model\Member"/>
     <preference for="DaoNguyen\Community\Api\MemberRepositoryInterface" type="DaoNguyen\Community\Model\MemberRepository"/>
+    <preference for="DaoNguyen\Community\Model\Post\PostOrderInterface" type="DaoNguyen\Community\Model\Post\PostOrdersProcessor"/>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
@@ -13,6 +14,15 @@
     <type name="DaoNguyen\Community\Model\ResourceModel\Group\Grid\Collection">
         <arguments>
             <argument name="resourceModel" xsi:type="string">DaoNguyen\Community\Model\ResourceModel\Group</argument>
+        </arguments>
+    </type>
+    <type name="DaoNguyen\Community\Model\Post\PostOrdersProcessor">
+        <arguments>
+            <argument name="orderClasses" xsi:type="array">
+                <item name="most_recent" xsi:type="string">DaoNguyen\Community\Model\Post\Order\MostRecent</item>
+                <item name="popular" xsi:type="string">DaoNguyen\Community\Model\Post\Order\Popular</item>
+                <item name="unanswered" xsi:type="string">DaoNguyen\Community\Model\Post\Order\Unanswered</item>
+            </argument>
         </arguments>
     </type>
 </config>

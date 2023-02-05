@@ -21,6 +21,7 @@ class Group extends AbstractModel implements IdentityInterface
     public const AUTO_APPROVE = 1;
     public const NOT_AUTO_APPROVE = 0;
     public const CACHE_TAG = 'com_g';
+    public const IS_ACTIVE = 'is_active';
 
     /**
      * @var StoreManagerInterface
@@ -134,5 +135,10 @@ class Group extends AbstractModel implements IdentityInterface
     public function getAutoApprove(): int
     {
         return (int) $this->getData('auto_approve');
+    }
+
+    public function isActive(): int
+    {
+        return (int) $this->getData('is_active');
     }
 }

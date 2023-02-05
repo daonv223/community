@@ -4,17 +4,27 @@
     <update handle="community"/>
     <head>
         <title>Community Home</title>
+        <link src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+              src_type="url"/>
     </head>
     <body>
         <referenceContainer name="content">
-            <block name="community.into" template="DaoNguyen_Community::intro.phtml"/>
+            <block name="community.intro" template="DaoNguyen_Community::intro.phtml" class="DaoNguyen\Community\Block\Intro" />
             <block name="community.home" template="DaoNguyen_Community::home.phtml">
                 <block name="community.home.post.list.orders" template="DaoNguyen_Community::post/orders.phtml" class="DaoNguyen\Community\Block\Post\Orders">
                     <arguments>
                         <argument name="post_orders" xsi:type="object">DaoNguyen\Community\ViewModel\PostOrders</argument>
                     </arguments>
                 </block>
-                <block name="community.home.post.list" class="DaoNguyen\Community\Block\Post\ListProduct" template="DaoNguyen_Community::post/list.phtml"/>
+                <block name="community.home.post.list" class="DaoNguyen\Community\Block\Post\ListPost" template="DaoNguyen_Community::post/list.phtml">
+                    <block name="community.home.post.preview" class="DaoNguyen\Community\Block\Post\Preview" />
+                    <block class="Magento\Theme\Block\Html\Pager" name="post_pager"/>
+                </block>
+                <block name="community.attached.posts" template="DaoNguyen_Community::attached-posts.phtml">
+                    <arguments>
+                        <argument name="attached_posts_view_model" xsi:type="object">DaoNguyen\Community\ViewModel\AttachedPosts</argument>
+                    </arguments>
+                </block>
             </block>
         </referenceContainer>
     </body>

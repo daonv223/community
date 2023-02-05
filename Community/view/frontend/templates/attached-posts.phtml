@@ -1,0 +1,12 @@
+<?php
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+<div class="attach-posts">
+    <h3><?= $escaper->escapeHtml('Getting Started') ?></h3>
+    <div class="content">
+        <?php foreach ($block->getAttachedPostsViewModel()->getAttachedPosts() as $data): ?>
+            <div class="attached-link"><a href="<?= $escaper->escapeUrl($data['href']) ?>"><?= $escaper->escapeHtml($data['title']) ?></a></div>
+        <?php endforeach; ?>
+    </div>
+</div>
