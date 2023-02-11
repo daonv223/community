@@ -1,0 +1,16 @@
+<?php
+/** @var $block \DaoNguyen\Community\Block\Post\Search\Result */
+/** @var $escaper \Magento\Framework\Escaper */
+$postList = $block->getPostListHtml();
+?>
+<?php if ($block->getResultCount()): ?>
+<div class="search results">
+    <?= $postList ?>
+</div>
+<?php else: ?>
+<div class="message notice">
+    <div>
+        <?= $escaper->escapeHtml('No posts') ?>
+    </div>
+</div>
+<?php endif; ?>

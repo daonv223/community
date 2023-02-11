@@ -1,0 +1,71 @@
+<?php
+/** @var \DaoNguyen\Community\Block\Post\Search\Navigation $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<div class="block filter" id="layered-filter-block" data-mage-init='
+{
+    "collapsible":
+    {
+        "openedState": "active",
+        "collapsible": true,
+        "active": false,
+        "collateral":
+        {
+            "openedState": "filter-active",
+            "element": "body"
+        }
+    }
+}'>
+    <div class="block-title filter-content">
+        <?= $block->getChildHtml('state') ?>
+        <?php if ($block->getLayer()->getState()->getFilters()) : ?>
+            <div class="block-actions filter-actions">
+                <a href="<?= $block->escapeUrl($block->getClearUrl()) ?>" class="action clear filter-clear">
+                    <span><?= $block->escapeHtml(__('Clear All')) ?></span>
+                </a>
+            </div>
+        <?php endif; ?>
+        <?php $wrapOptions = false; ?>
+        <?php foreach ($block->getFilters() as $filter): ?>
+        <?php if ($filter->getItemsCount()) : ?>
+        <?php if (!$wrapOptions) : ?>
+        <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= $block->escapeHtml(__('Searching Options')) ?></strong>
+        <div class="filter-options" id="narrow-by-list" data-role="content" data-mage-init='
+        {
+            "accordion":
+             {
+                "openedState": "active",
+                "collapsible": "true",
+                "active": false,
+                "multipleCollapsible": false
+             }
+        }'>
+        <?php $wrapOptions = true;
+        endif; ?>
+            <div data-role="collapsible" class="filter-options-item">
+                <div data-role="title" class="filter-options-title"><?= $escaper->escapeHtml(__($filter->getName())) ?></div>
+                <div data-role="content" class="filter-options-content">
+                    <ol class="items">
+                        <?php foreach ($filter->getItems() as $item): ?>
+                        <li class="item">
+                            <a href="<?= $escaper->escapeUrl($item->getUrl()) ?>" rel="nofollow"><?= $escaper->escapeHtml($item->getLabel()) ?></a>
+                        </li>
+                        <?php endforeach; ?>
+                    </ol>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php endforeach; ?>
+        <?php if ($wrapOptions) : ?>
+        </div>
+        <?php else : ?>
+            <script>
+                require([
+                    'jquery'
+                ], function ($) {
+                    $('#layered-filter-block').addClass('filter-no-options');
+                });
+            </script>
+        <?php endif; ?>
+    </div>
+</div>

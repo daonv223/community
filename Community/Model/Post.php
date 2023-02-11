@@ -22,6 +22,8 @@ class Post extends AbstractModel implements IdentityInterface
     public const APPROVED = 1;
     public const NOT_APPROVED = 0;
     public const CACHE_TAG = 'com_p';
+    public const GROUP_ID = 'group_id';
+    public const UPDATED_AT = 'updated_at';
 
     /**
      * @var GroupRepository

@@ -1,0 +1,28 @@
+<?php
+/**
+ * @var $block \DaoNguyen\Community\Block\Post\Search\Navigation\State
+ * @var $escaper \Magento\Framework\Escaper
+ */
+?>
+<?php $filters = $block->getActiveFilters() ?>
+<?php if(!empty($filters)): ?>
+<div class="filter-current" data-mage-init='{"collapsible":{"openedState": "active", "collapsible": true, "active": false }}'>
+    <strong class="block-subtitle filter-current-subtitle"
+            role="heading"
+            aria-level="2"
+            data-role="title"
+            data-count="<?= $escaper->escapeHtmlAttr(count($filters)) ?>"><?= $escaper->escapeHtml(__('Now searching by')) ?></strong>
+    <ol class="items">
+        <?php foreach ($filters as $filter): ?>
+            <li class="item">
+                <span class="filter-label"><?= $escaper->escapeHtml(__($filter->getName())) ?></span>
+                <span class="filter-value"><?= $escaper->escapeHtml(__($filter->getLabel())) ?></span>
+                <a class="action remove" href="<?= $escaper->escapeUrl($filter->getRemoveUrl()) ?>"
+                   title="<?= $escaper->escapeHtmlAttr(__('Remove')) . " " . $filter->getName() ?>">
+                    <span><?= $escaper->escapeHtml(__('Remove This Item')) ?></span>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ol>
+</div>
+<?php endif; ?>

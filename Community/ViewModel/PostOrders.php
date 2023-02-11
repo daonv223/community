@@ -7,6 +7,12 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 class PostOrders implements ArgumentInterface
 {
+    public const MAP = [
+        'most_recent' => 'updated_at',
+        'popular' => 'views',
+        'unanswered' => 'replies'
+    ];
+
     /**
      * Get available orders.
      *

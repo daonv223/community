@@ -15,7 +15,7 @@ $stats = $block->getCommunityStat();
                     <span><?= $escaper->escapeHtml(__('Search')) ?></span>
                 </label>
                 <input id="post-search"
-                       name="q"
+                       name="<?= $escaper->escapeHtmlAttr(\DaoNguyen\Community\Helper\Post\Search\Data::QUERY_VAR_NAME) ?>"
                        type="text"
                        class="input-text"
                        placeholder="<?= $escaper->escapeHtml('Search or ask a question') ?>"

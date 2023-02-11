@@ -1,0 +1,22 @@
+<?php
+/**
+ * @var $block \DaoNguyen\Community\Block\Post\Search\ListPost
+ * @var $escaper \Magento\Framework\Escaper
+ */
+?>
+<?php
+$postCollection = $block->getPostCollection();
+?>
+<?php if (!$postCollection->count()): ?>
+    <div class="message info empty">
+        <div><?= $escaper->escapeHtml(__('We can\'t find post matching the selection.')) ?></div>
+    </div>
+<?php else: ?>
+    <?= $block->getToolbarHtml() ?>
+    <div class="posts wrapper">
+        <?php foreach ($postCollection as $post): ?>
+            <?= $block->getPostPreviewHtml($post) ?>
+        <?php endforeach; ?>
+    </div>
+    <?= $block->getChildBlock('post.list.toolbar')->setIsBottom(true)->toHtml() ?>
+<?php endif; ?>

@@ -1,0 +1,76 @@
+<?php
+/**
+ * @var \DaoNguyen\Community\Block\Post\PostList\Toolbar $block
+ * @var \Magento\Framework\Locale\LocaleFormatter $localeFormatter
+ */
+?>
+<?php if ($block->getCollection()->getSize()): ?>
+<?php if ($block->getIsBottom()): ?>
+    <div class="toolbar toolbar-posts">
+        <?= $block->getPagerHtml() ?>
+    </div>
+<?php else: ?>
+    <div class="toolbar toolbar-posts" data-mage-init='{"DaoNguyen_Community/js/post/list/toolbar": <?= $block->getWidgetOptionsJson()?>}'>
+        <p class="toolbar-amount" id="toolbar-amount">
+            <?php if ($block->getLastPageNum() > 1):?>
+                <?= $block->escapeHtml(
+                    __(
+                        'Items %1-%2 of %3',
+                        '<span class="toolbar-number">' . $localeFormatter->formatNumber($block->getFirstNum()) . '</span>',
+                        '<span class="toolbar-number">' . $localeFormatter->formatNumber($block->getLastNum()) . '</span>',
+                        '<span class="toolbar-number">' . $localeFormatter->formatNumber($block->getTotalNum()) . '</span>'
+                    ),
+                    ['span']
+                ) ?>
+            <?php elseif ($block->getTotalNum() == 1):?>
+                <?= $block->escapeHtml(
+                    __(
+                        '%1 Item',
+                        '<span class="toolbar-number">' . $localeFormatter->formatNumber($block->getTotalNum()) . '</span>'
+                    ),
+                    ['span']
+                ) ?>
+            <?php else:?>
+                <?= $block->escapeHtml(
+                    __(
+                        '%1 Items',
+                        '<span class="toolbar-number">' . $localeFormatter->formatNumber($block->getTotalNum()) . '</span>'
+                    ),
+                    ['span']
+                ) ?>
+            <?php endif; ?>
+        </p>
+        <div class="toolbar-sorted sorter">
+            <label class="sorter-label" for="sorter"><?= $block->escapeHtml(__('Sort By')) ?></label>
+            <select id="sorter" data-role="sorter" class="sorter-options">
+                <?php foreach ($block->getOrders() as $key => $order): ?>
+                    <option value="<?= $block->escapeHtmlAttr($key) ?>"
+                        <?php if ($block->isOrderCurrent($key)): ?>
+                            selected="selected"
+                        <?php endif; ?>
+                    >
+                        <?= $block->escapeHtml(__($order)) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <?php if ($block->getCurrentDirection() == 'desc') :?>
+                <a title="<?= $block->escapeHtmlAttr(__('Set Ascending Direction')) ?>"
+                   href="#"
+                   class="action sorter-action sort-desc"
+                   data-role="direction-switcher"
+                   data-value="asc">
+                    <span><?= $block->escapeHtml(__('Set Ascending Direction')) ?></span>
+                </a>
+            <?php else :?>
+                <a title="<?= $block->escapeHtmlAttr(__('Set Descending Direction')) ?>"
+                   href="#"
+                   class="action sorter-action sort-asc"
+                   data-role="direction-switcher"
+                   data-value="desc">
+                    <span><?= $block->escapeHtml(__('Set Descending Direction')) ?></span>
+                </a>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>
+<?php endif; ?>
