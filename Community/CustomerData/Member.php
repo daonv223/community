@@ -44,6 +44,7 @@ class Member implements SectionSourceInterface
             $member = $this->memberSession->getCurrentMember();
             $data = $member->getData();
             $data['joined_groups'] = $member->getJoinedGroups();
+            $data['liked_posts'] = $member->getLikedPosts();
             return $data;
         } catch (Exception) {
             return [];

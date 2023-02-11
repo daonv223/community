@@ -8,9 +8,10 @@ use DaoNguyen\Community\Block\Post\Preview;
 use DaoNguyen\Community\Model\Post;
 use DaoNguyen\Community\Model\Post\Search\Layer;
 use DaoNguyen\Community\Model\ResourceModel\Post\Collection;
+use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\View\Element\Template;
 
-class ListPost extends Template
+class ListPost extends Template implements IdentityInterface
 {
     /**
      * @var Collection
@@ -85,5 +86,14 @@ class ListPost extends Template
         $previewBlock = $this->getChildBlock('post.preview');
         $previewBlock->setPost($post);
         return $previewBlock->toHtml();
+    }
+
+    public function getIdentities()
+    {
+        $identities = [Post::CACHE_TAG];
+        foreach ($this->getPostCollection() as /** @var Post $post */ $post) {
+            $identities[] = Post::CACHE_TAG . '_' . $post->getEntityId();
+        }
+        return $identities;
     }
 }

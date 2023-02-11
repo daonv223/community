@@ -157,6 +157,15 @@ class Member extends AbstractModel implements MemberInterface
         return $connection->fetchCol($select);
     }
 
+    public function getLikedPosts(): array
+    {
+        $connection = $this->getResource()->getConnection();
+        $select = $connection->select()
+            ->from('community_post_reaction', 'post_id')
+            ->where('member_id = ?', $this->getId());
+        return $connection->fetchCol($select);
+    }
+
     /**
      * Set uuid.
      *

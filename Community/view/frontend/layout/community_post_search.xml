@@ -25,6 +25,5 @@
                 <block class="DaoNguyen\Community\Block\Post\Search\Navigation\State" name="post.search.navigation.state" as="state" />
             </block>
         </referenceContainer>
-        <referenceContainer name="sidebar.additional" remove="true"/>
     </body>
 </page>

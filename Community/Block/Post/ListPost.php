@@ -56,6 +56,7 @@ class ListPost extends Template implements IdentityInterface
     {
         if ($this->collection === null) {
             $collection = $this->collectionFactory->create();
+            $collection->addFieldToFilter(Post::STATUS, ['eq' => 1]);
             $collection->addReplies();
             $this->postOrder->setOrder($collection);
             $collection->setPageSize(5);

@@ -55,3 +55,17 @@ $member = $post->getMember()
         }
     }
 </script>
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $(function () {
+            const formData = {
+                'form_key': $('input[name="form_key"]').val(),
+                'postId': <?= $post->getEntityId() ?>
+            }
+            const url = "<?= $block->getUrl('community/post/increaseViews') ?>";
+            $.post(url, formData);
+        });
+    });
+</script>

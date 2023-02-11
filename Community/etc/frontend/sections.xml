@@ -4,4 +4,7 @@
     <action name="community/member/join">
         <section name="member"/>
     </action>
+    <action name="community/member/reaction">
+        <section name="member"/>
+    </action>
 </config>
