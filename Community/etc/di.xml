@@ -34,4 +34,11 @@
             </argument>
         </arguments>
     </type>
+    <type name="DaoNguyen\Community\Model\Rule\Condition\Rank">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="form_name" xsi:type="string">sales_rule_form</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

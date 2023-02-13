@@ -1,6 +1,7 @@
 <?php
 /** @var \Magento\Framework\Escaper $escaper */
 /** @var \DaoNguyen\Community\Block\Post\Comment\ReplyTo $block */
+$helper = $this->helper(\DaoNguyen\Community\Helper\RankSystem::class);
 ?>
 <div class="reply-to">
     <div class="heading">
@@ -18,7 +19,9 @@
             <div class="author">
                 <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarAuthorUrl()) ?>" alt="avatar">
                 <div class="nickname"><?= $escaper->escapeHtml($member->getNickname()) ?></div>
-                <div class="badges"></div>
+                <div class="badges">
+                    <div class="community-rank"><?= $helper->getRank($member->getRankPoints()) ?></div>
+                </div>
             </div>
             <div class="post-time-details">
                 <span><?= $escaper->escapeHtml(__('Posted')) ?></span>
@@ -40,7 +43,9 @@
             <div class="author">
                 <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarAuthorUrl()) ?>" alt="avatar">
                 <div class="nickname"><?= $escaper->escapeHtml($member->getNickname()) ?></div>
-                <div class="badges"></div>
+                <div class="badges">
+                    <div class="community-rank"><?= $helper->getRank($member->getRankPoints()) ?></div>
+                </div>
             </div>
             <div class="post-time-details">
                 <span><?= $escaper->escapeHtml(__('Posted')) ?></span>

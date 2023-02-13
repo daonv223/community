@@ -153,5 +153,22 @@
             "COMMUNITY_COMMENT_MEMBER_ID_COMMUNITY_MEMBER_ENTITY_ID": true,
             "COMMUNITY_COMMENT_PARENT_ID_COMMUNITY_COMMENT_ENTITY_ID": true
         }
+    },
+    "community_activity": {
+        "column": {
+            "activity_id": true,
+            "actor_id": true,
+            "points": true,
+            "action": true,
+            "entity": true,
+            "additional_data": true,
+            "created_at": true,
+            "points_delta": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "COMMUNITY_ACTIVITY_ACTOR_ID_COMMUNITY_MEMBER_ENTITY_ID": true,
+            "COMMUNITY_ACTIVITY_ACTOR_ID_ACTION_ENTITY": true
+        }
     }
 }

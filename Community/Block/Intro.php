@@ -34,7 +34,7 @@ class Intro extends Template
      */
     public function getCommunityName(): string
     {
-        return 'Beauty Insider Community';
+        return $this->_scopeConfig->getValue('community_general/community_information/name');
     }
 
     public function getCommunityStat(): array

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="community_comment_model_save_after">
+        <observer name="community_rank_system_comment" instance="DaoNguyen\Community\Observer\MemberCommented"/>
+    </event>
+    <event name="community_post_model_save_after">
+        <observer name="community_rank_system_post" instance="DaoNguyen\Community\Observer\Posted"/>
+    </event>
+    <event name="community_member_model_save_after">
+        <observer name="community_rank_system_registration" instance="DaoNguyen\Community\Observer\Registered"/>
+    </event>
+    <event name="community_media_model_save_after">
+        <observer name="community_rank_system_uploaded" instance="DaoNguyen\Community\Observer\Uploaded"/>
+    </event>
+    <event name="salesrule_rule_condition_combine">
+        <observer name="community_rank_condition" instance="DaoNguyen\Community\Observer\RankConditionObserver"/>
+    </event>
+</config>

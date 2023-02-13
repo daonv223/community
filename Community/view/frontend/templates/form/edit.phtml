@@ -5,6 +5,7 @@ use Magento\Framework\View\Helper\SecureHtmlRenderer;
 /** @var Profile $block */
 /** @var SecureHtmlRenderer $secureRenderer */
 $member = $block->getMember();
+$helper = $this->helper(\DaoNguyen\Community\Helper\RankSystem::class);
 ?>
 <form method="post" id="form-validate" enctype="multipart/form-data"
       data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>"
@@ -54,7 +55,7 @@ $member = $block->getMember();
             </div>
         </div>
         <div class="field">
-            <strong><span><?= $block->escapeHtml(__('Your community rank:')) ?> </span><span>Window shopper</span></strong>
+            <strong><span><?= $block->escapeHtml(__('Your community rank:')) ?> </span><span><?= $helper->getRank($member->getRankPoints()) ?></span></strong>
         </div>
     </fieldset id=>
     <div class="actions-toolbar">

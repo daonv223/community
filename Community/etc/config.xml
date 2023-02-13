@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <community_rank_system>
+            <configuration>
+                <ranks>{"100": "Window Shopper"}</ranks>
+            </configuration>
+            <actions>
+                <register>10</register>
+                <post>50</post>
+                <join_group>10</join_group>
+                <comment>20</comment>
+                <upload_image>20</upload_image>
+            </actions>
+        </community_rank_system>
+        <community_general>
+            <community_information>
+                <name>Beauty Insider Community</name>
+                <description>Ask questions, join challenges, and get recommendations from people like you</description>
+            </community_information>
+        </community_general>
+    </default>
+</config>

@@ -2,6 +2,7 @@
 /** @var \DaoNguyen\Community\Block\Post\Comment\View $block */
 /** @var \Magento\Framework\Escaper $escaper */
 $comment = $block->getComment();
+$helper = $this->helper(\DaoNguyen\Community\Helper\RankSystem::class);
 ?>
 <div class="comment-view-wrapper">
     <div class="comment">
@@ -9,7 +10,9 @@ $comment = $block->getComment();
             <div class="author">
                 <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarAuthorUrl()) ?>" alt="avatar">
                 <div class="nickname"><?= $escaper->escapeHtml($comment->getMember()->getNickname()) ?></div>
-                <div class="badges"></div>
+                <div class="badges">
+                    <div class="community-rank"><?= $helper->getRank($comment->getMember()->getRankPoints()) ?></div>
+                </div>
             </div>
             <div class="updated-at"><?= $escaper->escapeHtml($comment->getUpdatedAt()) ?></div>
         </div>

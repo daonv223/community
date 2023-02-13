@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="community" translate="label">
+            <label>Community</label>
+        </tab>
+        <section id="community_general" translate="label" type="text" sortOrder="10" showInDefault="1">
+            <label>General</label>
+            <tab>community</tab>
+            <resource>DaoNguyen_Community::config</resource>
+            <group id="community_information" translate="label" type="text" sortOrder="10" showInDefault="1">
+                <label>Community Information</label>
+                <field id="name" translate="label" type="text" sortOrder="10" showInDefault="1">
+                    <label>Name</label>
+                </field>
+                <field id="description" translate="label" type="textarea" sortOrder="10" showInDefault="1">
+                    <label>Description</label>
+                </field>
+            </group>
+        </section>
+        <section id="community_rank_system" translate="label" type="text" sortOrder="20" showInDefault="1">
+            <label>Community Rank System</label>
+            <tab>community</tab>
+            <resource>DaoNguyen_Community::config</resource>
+            <group id="configuration" translate="label" type="text" sortOrder="10" showInDefault="1">
+                <label>Rank System Configuration</label>
+                <field id="ranks" translate="label" sortOrder="10" showInDefault="1">
+                    <label>Community Ranks</label>
+                    <frontend_model>DaoNguyen\Community\Block\Adminhtml\Form\Field\Rank</frontend_model>
+                    <backend_model>DaoNguyen\Community\Model\System\Config\Backend\Rank</backend_model>
+                </field>
+            </group>
+            <group id="actions" translate="label" type="text" sortOrder="20" showInDefault="1">
+                <label>Actions for Acquiring Points by Members</label>
+                <field id="register" translate="label" type="text" sortOrder="10" showInDefault="1">
+                    <label>Registration</label>
+                </field>
+                <field id="post" translate="label" type="text" sortOrder="20" showInDefault="1">
+                    <label>Create new post</label>
+                </field>
+                <field id="comment" translate="label" type="text" sortOrder="30" showInDefault="1">
+                    <label>Comment</label>
+                </field>
+                <field id="join_group" translate="label" type="text" sortOrder="40" showInDefault="1">
+                    <label>Join Group</label>
+                </field>
+                <field id="upload_image" translate="label" type="text" sortOrder="50" showInDefault="1">
+                    <label>Upload Image</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

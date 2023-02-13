@@ -187,5 +187,26 @@
         <constraint xsi:type="foreign" referenceId="COMMUNITY_COMMENT_PARENT_ID_COMMUNITY_COMMENT_ENTITY_ID"
                     table="community_comment" column="parent_id" referenceTable="community_comment" referenceColumn="entity_id"/>
     </table>
+    <table name="community_activity" resource="default" engine="innodb" comment="Community Activity">
+        <column xsi:type="int" name="activity_id" unsigned="true" nullable="false" identity="true" comment="Activity Id"/>
+        <column xsi:type="int" name="actor_id" unsigned="true" nullable="false" comment="Actor Id"/>
+        <column xsi:type="int" name="points" unsigned="false" nullable="false" default="0" comment="Points"/>
+        <column xsi:type="smallint" name="action" unsigned="false" nullable="false" identity="false" default="0" comment="Action"/>
+        <column xsi:type="int" name="entity" unsigned="false" nullable="true" identity="false" comment="Entity Id"/>
+        <column xsi:type="text" name="additional_data" nullable="true" comment="Additional Data"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="activity_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_ACTIVITY_ACTOR_ID_COMMUNITY_MEMBER_ENTITY_ID"
+                    table="community_activity" column="actor_id" referenceTable="community_member" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="COMMUNITY_ACTIVITY_ACTOR_ID_ACTION_ENTITY">
+            <column name="actor_id"/>
+            <column name="action"/>
+            <column name="entity"/>
+        </constraint>
+    </table>
 </schema>
 

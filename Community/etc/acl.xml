@@ -8,6 +8,7 @@
                     <resource id="DaoNguyen_Community::group" title="Group" translate="title">
                         <resource id="DaoNguyen_Community::group_save" title="Save Groups"/>
                     </resource>
+                    <resource id="DaoNguyen_Community::config" title="Community Configuration" translate="title"/>
                 </resource>
             </resource>
         </resources>

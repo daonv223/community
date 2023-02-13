@@ -2,7 +2,8 @@
 /** @var \DaoNguyen\Community\Block\Post\View\PostView $block */
 /** @var \Magento\Framework\Escaper $escaper */
 $post = $block->getPost();
-$member = $post->getMember()
+$member = $post->getMember();
+$helper = $this->helper(\DaoNguyen\Community\Helper\RankSystem::class);
 ?>
 <div class="post-content" xmlns="http://www.w3.org/1999/html">
     <div class="post-in">
@@ -19,7 +20,9 @@ $member = $post->getMember()
     <div class="author">
         <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarAuthorUrl()) ?>" alt="avatar">
         <div class="nickname"><?= $escaper->escapeHtml($member->getNickname()) ?></div>
-        <div class="badges"></div>
+        <div class="badges">
+            <div class="community-rank"><?= $helper->getRank($member->getRankPoints()) ?></div>
+        </div>
     </div>
     <div class="post-subject">
         <h2><?= $post->getSubject() ?></h2>

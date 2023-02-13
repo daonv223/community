@@ -3,6 +3,7 @@
 /** @var \Magento\Framework\Escaper $escaper */
 $post = $block->getPost();
 $recentComment = $block->getRecentComment();
+$helper = $this->helper(\DaoNguyen\Community\Helper\RankSystem::class);
 ?>
 <div class="post-preview-container">
     <div class="post-preview">
@@ -23,7 +24,9 @@ $recentComment = $block->getRecentComment();
         <div class="author">
             <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarAuthorUrl($post->getMember())) ?>" alt="avatar">
             <div class="nickname"><?= $escaper->escapeHtml($post->getMember()->getNickname()) ?></div>
-            <div class="badges"></div>
+            <div class="badges">
+                <div class="community-rank"><?= $helper->getRank($post->getMember()->getRankPoints()) ?></div>
+            </div>
         </div>
         <div class="preview-content">
             <?= $block->truncate($post->getContent()) ?>
@@ -35,7 +38,9 @@ $recentComment = $block->getRecentComment();
                     <div class="author">
                         <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarAuthorUrl($recentComment->getMember())) ?>" alt="avatar">
                         <div class="nickname"><?= $escaper->escapeHtml($recentComment->getMember()->getNickname()) ?></div>
-                        <div class="badges"></div>
+                        <div class="badges">
+                            <div class="community-rank"><?= $helper->getRank($recentComment->getMember()->getRankPoints()) ?></div>
+                        </div>
                     </div>
                     <div class="updated-at"><?= $escaper->escapeHtml($recentComment->getUpdatedAt()) ?></div>
                 </div>

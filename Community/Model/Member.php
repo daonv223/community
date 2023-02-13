@@ -243,4 +243,17 @@ class Member extends AbstractModel implements MemberInterface
     {
         return (int) $this->getData('entity_id');
     }
+
+    public function getRankPoints(): int
+    {
+        if ($this->getData('rank_points') === null) {
+            $conn = $this->getResource()->getConnection();
+            $select = $conn->select()
+                ->from('community_activity', 'SUM(points)')
+                ->where('actor_id = ?', $this->getEntityId());
+            $points = (int) $conn->fetchOne($select);
+            $this->setData('rank_points', $points);
+        }
+        return $this->getData('rank_points');
+    }
 }
