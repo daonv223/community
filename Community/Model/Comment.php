@@ -40,8 +40,20 @@ class Comment extends AbstractModel implements IdentityInterface
     private ResourceModel\CollectionFactory $collectionFactory;
 
     /**
+     * @var PostRepository
+     */
+    private PostRepository $postRepository;
+
+    /**
+     * @var CommentRepository
+     */
+    private CommentRepository $commentRepository;
+
+    /**
      * @param MemberRepositoryInterface $memberRepository
      * @param CollectionFactory $collectionFactory
+     * @param PostRepository $postRepository
+     * @param CommentRepository $commentRepository
      * @param Context $context
      * @param Registry $registry
      * @param AbstractResource|null $resource
@@ -51,6 +63,8 @@ class Comment extends AbstractModel implements IdentityInterface
     public function __construct(
         MemberRepositoryInterface $memberRepository,
         ResourceModel\CollectionFactory $collectionFactory,
+        PostRepository $postRepository,
+        CommentRepository $commentRepository,
         Context $context,
         Registry $registry,
         AbstractResource $resource = null,
@@ -60,6 +74,8 @@ class Comment extends AbstractModel implements IdentityInterface
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
         $this->memberRepository = $memberRepository;
         $this->collectionFactory = $collectionFactory;
+        $this->postRepository = $postRepository;
+        $this->commentRepository = $commentRepository;
     }
 
     /**
@@ -117,6 +133,35 @@ class Comment extends AbstractModel implements IdentityInterface
             $this->setData('member', $member);
         }
         return $this->getData('member');
+    }
+
+    /**
+     * @return Post
+     * @throws NoSuchEntityException
+     */
+    public function getPost()
+    {
+        $post = $this->getData('post');
+        if (!$post) {
+            $postId = $this->getPostId();
+            $post = $this->postRepository->getById($postId);
+            $this->setData('post', $post);
+        }
+        return $this->getData('post');
+    }
+
+
+    /**
+     * @return Comment|null
+     * @throws NoSuchEntityException
+     */
+    public function getParentComment()
+    {
+        $parentId = $this->getParentId();
+        if ($parentId === null) {
+            return null;
+        }
+        return $this->commentRepository->getById((int) $parentId);
     }
 
     /**

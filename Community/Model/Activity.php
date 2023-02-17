@@ -61,8 +61,11 @@ class Activity extends AbstractModel
     public function saveActivity()
     {
         if ($this->canSaveActivity()) {
-            $this->setPoints($this->getActionInstance($this->getAction())->getPoint());
+            $actionInstance = $this->getActionInstance();
+            $this->setPoints($actionInstance->getPoint());
             $this->save();
+            $actionInstance->setDataObject($this->getDataObject());
+            $actionInstance->createNotifications();
         }
     }
 
@@ -70,11 +73,11 @@ class Activity extends AbstractModel
      * @param int $action
      * @return AbstractAction
      */
-    public function getActionInstance(int $action)
+    public function getActionInstance()
     {
         if ($this->getData('actionInstance') === null) {
             /** @var AbstractAction $instance */
-            $instance = $this->objectManager->create(self::$actionModelClasses[$action]);
+            $instance = $this->objectManager->create(self::$actionModelClasses[$this->getAction()]);
             $this->setData('actionInstance', $instance);
         }
         return $this->getData('actionInstance');

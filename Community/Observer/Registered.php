@@ -30,6 +30,7 @@ class Registered implements ObserverInterface
             $activity->setActorId($member->getEntityId());
             $activity->setAction(Activity::ACTIVITY_ACTION_REGISTRATION);
             $activity->setEntity($member->getEntityId());
+            $activity->setDataObject($member);
             $activity->saveActivity();
         }
     }

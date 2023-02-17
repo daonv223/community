@@ -30,6 +30,7 @@ class Posted implements ObserverInterface
             $activity->setActorId($post->getMemberId());
             $activity->setAction(Activity::ACTIVITY_ACTION_POST);
             $activity->setEntity($post->getEntityId());
+            $activity->setDataObject($post);
             $activity->saveActivity();
         }
     }

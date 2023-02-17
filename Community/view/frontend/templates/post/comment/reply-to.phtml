@@ -17,7 +17,7 @@ $helper = $this->helper(\DaoNguyen\Community\Helper\RankSystem::class);
             $member = $post->getMember();
             ?>
             <div class="author">
-                <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarAuthorUrl()) ?>" alt="avatar">
+                <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarUrl($member)) ?>" alt="avatar">
                 <div class="nickname"><?= $escaper->escapeHtml($member->getNickname()) ?></div>
                 <div class="badges">
                     <div class="community-rank"><?= $helper->getRank($member->getRankPoints()) ?></div>
@@ -41,7 +41,7 @@ $helper = $this->helper(\DaoNguyen\Community\Helper\RankSystem::class);
             $member = $comment->getMember();
             ?>
             <div class="author">
-                <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarAuthorUrl()) ?>" alt="avatar">
+                <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarUrl($member)) ?>" alt="avatar">
                 <div class="nickname"><?= $escaper->escapeHtml($member->getNickname()) ?></div>
                 <div class="badges">
                     <div class="community-rank"><?= $helper->getRank($member->getRankPoints()) ?></div>

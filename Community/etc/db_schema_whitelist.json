@@ -170,5 +170,30 @@
             "COMMUNITY_ACTIVITY_ACTOR_ID_COMMUNITY_MEMBER_ENTITY_ID": true,
             "COMMUNITY_ACTIVITY_ACTOR_ID_ACTION_ENTITY": true
         }
+    },
+    "community_notification": {
+        "column": {
+            "notification_id": true,
+            "message": true,
+            "href": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "community_notification_receiver": {
+        "column": {
+            "id": true,
+            "receiver_id": true,
+            "notification_id": true,
+            "status": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "COMMUNITY_NTFC_RECEIVER_RECEIVER_ID_COMMUNITY_MEMBER_ENTT_ID": true,
+            "COMMUNITY_NTFC_RECEIVER_NTFC_ID_COMMUNITY_NTFC_NTFC_ID": true
+        }
     }
 }

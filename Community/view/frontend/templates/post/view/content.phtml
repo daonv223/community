@@ -18,7 +18,7 @@ $helper = $this->helper(\DaoNguyen\Community\Helper\RankSystem::class);
         <span><?= $post->getUpdatedAt() ?></span>
     </div>
     <div class="author">
-        <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarAuthorUrl()) ?>" alt="avatar">
+        <img class="avatar" src="<?= $escaper->escapeUrl($block->getAvatarUrl($member)) ?>" alt="avatar">
         <div class="nickname"><?= $escaper->escapeHtml($member->getNickname()) ?></div>
         <div class="badges">
             <div class="community-rank"><?= $helper->getRank($member->getRankPoints()) ?></div>
@@ -58,17 +58,17 @@ $helper = $this->helper(\DaoNguyen\Community\Helper\RankSystem::class);
         }
     }
 </script>
-<script>
-    require([
-        'jquery'
-    ], function ($) {
-        $(function () {
-            const formData = {
-                'form_key': $('input[name="form_key"]').val(),
-                'postId': <?= $post->getEntityId() ?>
-            }
-            const url = "<?= $block->getUrl('community/post/increaseViews') ?>";
-            $.post(url, formData);
-        });
-    });
-</script>
+<!--<script>-->
+<!--    require([-->
+<!--        'jquery'-->
+<!--    ], function ($) {-->
+<!--        $(function () {-->
+<!--            const formData = {-->
+<!--                'form_key': $('input[name="form_key"]').val(),-->
+<!--                'postId': --><?php //= $post->getEntityId() ?>
+//            }
+//            const url = "<?php //= $block->getUrl('community/post/increaseViews') ?>//";
+//            $.post(url, formData);
+//        });
+//    });
+//</script>

@@ -208,5 +208,32 @@
             <column name="entity"/>
         </constraint>
     </table>
+    <table name="community_notification" resource="default" engine="innodb" comment="Community Notification">
+        <column xsi:type="int" name="notification_id" unsigned="true" nullable="false" identity="true" comment="Community Notification"/>
+        <column xsi:type="text" name="message" nullable="false" comment="Message"/>
+        <column xsi:type="varchar" name="href" length="512" nullable="true" comment="Notification Href"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="notification_id"/>
+        </constraint>
+    </table>
+    <table name="community_notification_receiver" resource="default" engine="innodb" comment="Community Notification Receiver">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="int" name="receiver_id" unsigned="true" nullable="false" comment="Receiver_id"/>
+        <column xsi:type="int" name="notification_id" unsigned="true" nullable="false" comment="Notification Id"/>
+        <column xsi:type="tinyint" name="status" nullable="false" default="0" unsigned="true" comment="Status"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_NOTIFICATION_RECEIVER_RECEIVER_ID_COMMUNITY_MEMBER_ENTITY_ID"
+                    table="community_notification_receiver" column="receiver_id" referenceTable="community_member" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="COMMUNITY_NOTIFICATION_RECEIVER_NOTIFICATION_ID_COMMUNITY_NOTIFICATION_NOTIFICATION_ID"
+                    table="community_notification_receiver" column="notification_id" referenceTable="community_notification" referenceColumn="notification_id"
+                    onDelete="CASCADE"/>
+    </table>
 </schema>
 

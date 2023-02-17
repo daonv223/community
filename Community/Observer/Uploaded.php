@@ -30,6 +30,7 @@ class Uploaded implements ObserverInterface
             $activity->setActorId($media->getData('member_id'));
             $activity->setAction(Activity::ACTIVITY_ACTION_UPLOAD_MEDIA);
             $activity->setEntity($media->getData('value_id'));
+            $activity->setDataObject($media);
             $activity->saveActivity();
         }
     }

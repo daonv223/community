@@ -7,4 +7,10 @@
     <action name="community/member/reaction">
         <section name="member"/>
     </action>
+    <action name="community/post/save">
+        <section name="member"/>
+    </action>
+    <action name="community/post_comment/save">
+        <section name="member"/>
+    </action>
 </config>

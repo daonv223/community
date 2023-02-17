@@ -30,6 +30,7 @@ class MemberCommented implements ObserverInterface
             $activity->setActorId($comment->getMemberId());
             $activity->setAction(Activity::ACTIVITY_ACTION_COMMENT);
             $activity->setEntity($comment->getEntityId());
+            $activity->setDataObject($comment);
             $activity->saveActivity();
         }
     }

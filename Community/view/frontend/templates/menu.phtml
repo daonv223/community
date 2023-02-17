@@ -13,6 +13,25 @@ use Magento\Framework\View\Element\Template;
         <ul class="nav-links">
             <li class="nav-item"><a href="<?= $block->getUrl('community/post/create') ?>">Create a Post</a></li>
             <li class="nav-item"><a href="#">Add a Photo</a></li>
+            <li class="nav-item">
+                <div data-bind="scope: 'notifications'">
+                    <!-- ko template: getTemplate() --><!-- /ko -->
+                </div>
+            </li>
         </ul>
     </nav>
 </div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "notifications": {
+                        "component": "DaoNguyen_Community/js/notifications",
+                        "template": "DaoNguyen_Community/notifications"
+                    }
+                }
+            }
+        }
+    }
+</script>

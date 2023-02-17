@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace DaoNguyen\Community\CustomerData;
 
+use DaoNguyen\Community\Model\ResourceModel\NotificationReceiver;
 use DaoNguyen\Community\Model\Session;
 use Exception;
 use Magento\Customer\CustomerData\SectionSourceInterface;
@@ -21,13 +22,23 @@ class Member implements SectionSourceInterface
     private Session $memberSession;
 
     /**
+     * @var NotificationReceiver
+     */
+    private NotificationReceiver $notificationResource;
+
+    /**
      * @param CurrentCustomer $currentCustomer
      * @param Session $memberSession
+     * @param NotificationReceiver $notificationResource
      */
-    public function __construct(CurrentCustomer $currentCustomer, Session $memberSession)
-    {
+    public function __construct(
+        CurrentCustomer $currentCustomer,
+        Session $memberSession,
+        NotificationReceiver $notificationResource
+    ) {
         $this->currentCustomer = $currentCustomer;
         $this->memberSession = $memberSession;
+        $this->notificationResource = $notificationResource;
     }
 
     /**
@@ -46,7 +57,7 @@ class Member implements SectionSourceInterface
             $data['joined_groups'] = $member->getJoinedGroups();
             $data['liked_posts'] = $member->getLikedPosts();
             return $data;
-        } catch (Exception) {
+        } catch (Exception $e) {
             return [];
         }
     }

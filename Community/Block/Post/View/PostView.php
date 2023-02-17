@@ -70,11 +70,10 @@ class PostView extends Template implements IdentityInterface
      *
      * @return string
      */
-    public function getAvatarAuthorUrl(): string
+    public function getAvatarUrl($member): string
     {
-        $author = $this->getPost()->getMember();
         try {
-            return $this->memberHelper->getMemberAvatarUrl($author);
+            return $this->memberHelper->getMemberAvatarUrl($member);
         } catch (NoSuchEntityException) {
             return $this->getViewFileUrl('DaoNguyen_Community::images/avatar-default.png');
         }

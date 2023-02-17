@@ -141,4 +141,19 @@ class Group extends AbstractModel implements IdentityInterface
     {
         return (int) $this->getData('is_active');
     }
+
+    /**
+     * @return array
+     */
+    public function getAllMemberIds()
+    {
+        if ($this->getData('all_member_ids') === null) {
+            $conn = $this->getResource()->getConnection();
+            $select = $conn->select()
+                ->from('community_group_member', 'member_id')
+                ->where('group_id = ?', $this->getEntityId());
+            $this->setData('all_member_ids', $conn->fetchCol($select));
+        }
+        return $this->getData('all_member_ids');
+    }
 }
