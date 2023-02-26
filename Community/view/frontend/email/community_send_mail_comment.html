@@ -1,0 +1,10 @@
+<!--@subject {{trans "You have a notification from the community"}} @-->
+<!--@vars {
+"var notification":"Notification",
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<p>{{trans "Notification To: %notification." notification=$notification}}</p>
+
+{{template config_path="design/email/footer_template"}}

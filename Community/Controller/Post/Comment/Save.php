@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace DaoNguyen\Community\Controller\Post\Comment;
 
+use DaoNguyen\Community\Model\Comment;
+use DaoNguyen\Community\Model\CommentManagement;
 use DaoNguyen\Community\Model\CommentRepository;
 use DaoNguyen\Community\Model\Session;
 use Exception;
@@ -47,12 +49,18 @@ class Save implements HttpPostActionInterface
     private CommentRepository $commentRepository;
 
     /**
+     * @var CommentManagement
+     */
+    private CommentManagement $commentManagement;
+
+    /**
      * @param RedirectFactory $redirectFactory
      * @param CommentFactory $commentFactory
      * @param RequestInterface $request
      * @param Session $session
      * @param Manager $messageManager
      * @param CommentRepository $commentRepository
+     * @param CommentManagement $commentManagement
      */
     public function __construct(
         RedirectFactory $redirectFactory,
@@ -60,7 +68,8 @@ class Save implements HttpPostActionInterface
         RequestInterface $request,
         Session $session,
         Manager $messageManager,
-        CommentRepository $commentRepository
+        CommentRepository $commentRepository,
+        CommentManagement $commentManagement
     ) {
         $this->redirectFactory = $redirectFactory;
         $this->commentFactory = $commentFactory;
@@ -68,6 +77,7 @@ class Save implements HttpPostActionInterface
         $this->memberSession = $session;
         $this->messageManager = $messageManager;
         $this->commentRepository = $commentRepository;
+        $this->commentManagement = $commentManagement;
     }
 
     /**
@@ -84,6 +94,7 @@ class Save implements HttpPostActionInterface
             $currentMember = $this->memberSession->getCurrentMember();
             $comment->setMemberId($currentMember->getEntityId());
             $this->commentRepository->save($comment);
+            $this->commentManagement->sendMailToSubscriber($comment);
             $this->messageManager->addSuccessMessage('You saved the comment');
         } catch (SessionException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());

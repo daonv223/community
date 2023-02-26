@@ -5,7 +5,15 @@ namespace DaoNguyen\Community\Model;
 
 use DaoNguyen\Community\Api\Data\MemberInterface;
 use DaoNguyen\Community\Model\ResourceModel\Member as ResourceModel;
+use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Customer\Api\Data\CustomerInterface;
+use Magento\Framework\Data\Collection\AbstractDb;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Model\ResourceModel\AbstractResource;
+use Magento\Framework\Registry;
 use Zend_Db_Statement_Exception;
 
 class Member extends AbstractModel implements MemberInterface
@@ -14,6 +22,31 @@ class Member extends AbstractModel implements MemberInterface
      * @var string
      */
     protected $_eventPrefix = 'community_member_model';
+
+    /**
+     * @var CustomerRepositoryInterface
+     */
+    private CustomerRepositoryInterface $customerRepository;
+
+    /**
+     * @param CustomerRepositoryInterface $customerRepository
+     * @param Context $context
+     * @param Registry $registry
+     * @param AbstractResource|null $resource
+     * @param AbstractDb|null $resourceCollection
+     * @param array $data
+     */
+    public function __construct(
+        CustomerRepositoryInterface $customerRepository,
+        Context $context,
+        Registry $registry,
+        AbstractResource $resource = null,
+        AbstractDb $resourceCollection = null,
+        array $data = []
+    ) {
+        parent::__construct($context, $registry, $resource, $resourceCollection, $data);
+        $this->customerRepository = $customerRepository;
+    }
 
     /**
      * Initialize member model.
@@ -255,5 +288,17 @@ class Member extends AbstractModel implements MemberInterface
             $this->setData('rank_points', $points);
         }
         return $this->getData('rank_points');
+    }
+
+    /**
+     * Get customer.
+     *
+     * @return CustomerInterface
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
+     */
+    public function getCustomer(): CustomerInterface
+    {
+        return $this->customerRepository->getById($this->getCustomerId());
     }
 }
