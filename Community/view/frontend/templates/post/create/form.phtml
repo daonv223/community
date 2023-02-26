@@ -25,7 +25,7 @@ use DaoNguyen\Community\Block\Post\Create\Form;
             <div class="control">
                 <select id="group_id" name="group_id" class="input-select" data-validate="{required: true}">
                     <?php foreach ($block->toOptionArray() as $option): ?>
-                        <option value="<?= $block->escapeHtmlAttr($option['value']) ?>">
+                        <option value="<?= $block->escapeHtmlAttr($option['value']) ?>" <?php if ($block->getRequest()->getParam('group_id') === $option['value']): ?><?= 'selected' ?><?php endif; ?>>
                             <?= $block->escapeHtml($option['label']) ?>
                         </option>
                     <?php endforeach; ?>

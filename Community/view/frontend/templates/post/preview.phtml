@@ -9,7 +9,7 @@ $helper = $this->helper(\DaoNguyen\Community\Helper\RankSystem::class);
     <div class="post-preview">
         <div class="location">
             <span><?= $escaper->escapeHtml(__('Post in')) ?></span>
-            <a href="#"><strong><?= $post->getGroup()->getName() ?></strong></a>
+            <a href="<?= $block->escapeUrl($block->getUrl('community/post/view', ['id' => $post->getGroup()->getEntityId()])) ?>"><strong><?= $post->getGroup()->getName() ?></strong></a>
         </div>
         <div class="subject">
             <a href="<?= $escaper->escapeUrl($block->getUrl('community/post/view', ['id' => $post->getId()])) ?>"><p><?= $escaper->escapeHtml($post->getSubject()) ?></p></a>

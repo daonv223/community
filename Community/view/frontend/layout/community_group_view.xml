@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="2columns-left">
+    <update handle="community"/>
+    <body>
+        <referenceContainer name="columns.top">
+            <block name="group-info" template="DaoNguyen_Community::groups/view/info.phtml" class="DaoNguyen\Community\Block\Group\View\Info" />
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block name="posts" template="DaoNguyen_Community::groups/view/posts.phtml" class="DaoNguyen\Community\Block\Group\View\Posts">
+                <block class="DaoNguyen\Community\Block\Post\Search\ListPost" name="post.list" template="DaoNguyen_Community::post/search/list.phtml">
+                    <block class="DaoNguyen\Community\Block\Post\PostList\Toolbar" name="post.list.toolbar" template="DaoNguyen_Community::post/list/toolbar.phtml">
+                        <arguments>
+                            <argument name="post_orders_view_model" xsi:type="object">DaoNguyen\Community\ViewModel\PostOrders</argument>
+                        </arguments>
+                        <block class="Magento\Theme\Block\Html\Pager" name="post_list_toolbar_pager"/>
+                    </block>
+                    <block name="post.preview" class="DaoNguyen\Community\Block\Post\Preview" />
+                </block>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="sidebar.main">
+            <block class="DaoNguyen\Community\Block\Group\View\Navigation" name="group.view.posts.leftnav" before="-" template="DaoNguyen_Community::post/search/navigation.phtml">
+                <block class="DaoNguyen\Community\Block\Post\Search\Navigation\State" name="group.view.navigation.state" as="state" />
+            </block>
+        </referenceContainer>
+    </body>
+</page>

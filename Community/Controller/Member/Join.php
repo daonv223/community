@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace DaoNguyen\Community\Controller\Member;
 
+use DaoNguyen\Community\Model\Group;
 use DaoNguyen\Community\Model\Session;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\RequestInterface;
@@ -11,6 +12,7 @@ use Magento\Framework\Controller\Result\RedirectFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\SessionException;
 use Magento\Framework\Message\Manager;
+use Magento\PageCache\Model\Cache\Type;
 
 class Join implements HttpPostActionInterface
 {
@@ -34,22 +36,27 @@ class Join implements HttpPostActionInterface
      */
     private Manager $messageManager;
 
+    private Type $fullPageCache;
+
     /**
      * @param RedirectFactory $redirectFactory
      * @param RequestInterface $request
      * @param Session $session
      * @param Manager $messageManager
+     * @param Type $fullPageCache
      */
     public function __construct(
         RedirectFactory $redirectFactory,
         RequestInterface $request,
         Session $session,
-        Manager $messageManager
+        Manager $messageManager,
+        Type $fullPageCache
     ) {
         $this->redirectFactory = $redirectFactory;
         $this->request = $request;
         $this->session = $session;
         $this->messageManager = $messageManager;
+        $this->fullPageCache = $fullPageCache;
     }
 
     /**
@@ -61,6 +68,7 @@ class Join implements HttpPostActionInterface
             $currentMember = $this->session->getCurrentMember();
             $groupId = $this->request->getParam('group_id');
             $currentMember->joinGroups([$groupId]);
+            $this->fullPageCache->clean(\Zend_Cache::CLEANING_MODE_MATCHING_ANY_TAG, [Group::CACHE_TAG . '_' . $groupId]);
             $this->messageManager->addSuccessMessage('You joined this group successfully.');
         } catch (NoSuchEntityException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());

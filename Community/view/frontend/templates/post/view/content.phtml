@@ -8,7 +8,7 @@ $helper = $this->helper(\DaoNguyen\Community\Helper\RankSystem::class);
 <div class="post-content" xmlns="http://www.w3.org/1999/html">
     <div class="post-in">
         <span><?= $escaper->escapeHtml(__('Post In')) ?></span>
-        <a href="#"><strong><?= $block->getGroupName() ?></strong></a>
+        <a href="<?= $block->escapeUrl($block->getUrl('community/post/view', ['id' => $post->getGroup()->getEntityId()])) ?>"><strong><?= $block->getGroupName() ?></strong></a>
     </div>
     <div class="post-time-details">
         <span><?= $escaper->escapeHtml(__('Posted')) ?></span>
@@ -58,17 +58,3 @@ $helper = $this->helper(\DaoNguyen\Community\Helper\RankSystem::class);
         }
     }
 </script>
-<!--<script>-->
-<!--    require([-->
-<!--        'jquery'-->
-<!--    ], function ($) {-->
-<!--        $(function () {-->
-<!--            const formData = {-->
-<!--                'form_key': $('input[name="form_key"]').val(),-->
-<!--                'postId': --><?php //= $post->getEntityId() ?>
-//            }
-//            const url = "<?php //= $block->getUrl('community/post/increaseViews') ?>//";
-//            $.post(url, formData);
-//        });
-//    });
-//</script>

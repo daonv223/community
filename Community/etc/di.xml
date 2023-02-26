@@ -25,13 +25,40 @@
             </argument>
         </arguments>
     </type>
-    <type name="DaoNguyen\Community\Model\Post\Search\FilterList">
+<!--    <type name="DaoNguyen\Community\Model\Post\Search\FilterList">-->
+<!--        <arguments>-->
+<!--            <argument name="filterClasses" xsi:type="array">-->
+<!--                <item name="date" xsi:type="string">DaoNguyen\Community\Model\Post\Search\Filter\Date</item>-->
+<!--                <item name="location" xsi:type="string">DaoNguyen\Community\Model\Post\Search\Filter\Location</item>-->
+<!--                <item name="product" xsi:type="string">DaoNguyen\Community\Model\Post\Search\Filter\Product</item>-->
+<!--            </argument>-->
+<!--        </arguments>-->
+<!--    </type>-->
+    <virtualType name="DaoNguyen\Community\Model\Post\Search\Navigation\FilterList" type="DaoNguyen\Community\Model\Post\Search\FilterList">
         <arguments>
             <argument name="filterClasses" xsi:type="array">
                 <item name="date" xsi:type="string">DaoNguyen\Community\Model\Post\Search\Filter\Date</item>
                 <item name="location" xsi:type="string">DaoNguyen\Community\Model\Post\Search\Filter\Location</item>
                 <item name="product" xsi:type="string">DaoNguyen\Community\Model\Post\Search\Filter\Product</item>
             </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DaoNguyen\Community\Model\Group\View\FilterList" type="DaoNguyen\Community\Model\Post\Search\FilterList">
+        <arguments>
+            <argument name="filterClasses" xsi:type="array">
+                <item name="date" xsi:type="string">DaoNguyen\Community\Model\Post\Search\Filter\Date</item>
+                <item name="product" xsi:type="string">DaoNguyen\Community\Model\Post\Search\Filter\Product</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="DaoNguyen\Community\Block\Group\View\Navigation" type="DaoNguyen\Community\Block\Post\Search\Navigation">
+        <arguments>
+            <argument name="filterList" xsi:type="object">DaoNguyen\Community\Model\Group\View\FilterList</argument>
+        </arguments>
+    </virtualType>
+    <type name="DaoNguyen\Community\Block\Post\Search\Navigation">
+        <arguments>
+            <argument name="filterList" xsi:type="object">DaoNguyen\Community\Model\Post\Search\Navigation\FilterList</argument>
         </arguments>
     </type>
     <type name="DaoNguyen\Community\Model\Rule\Condition\Rank">

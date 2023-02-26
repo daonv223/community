@@ -1,0 +1,19 @@
+<?php
+/** @var \DaoNguyen\Community\Block\Group\View\Posts $block */
+/** @var \Magento\Framework\Escaper $escaper */
+$postList = $block->getPostListHtml();
+?>
+<div class="posts-header">
+    <h3><?= $block->escapeHtml('All Posts in this Group') ?></h3>
+</div>
+<?php if ($block->getResultCount()): ?>
+<div class="posts">
+    <?= $postList ?>
+</div>
+<?php else: ?>
+<div class="message notice">
+    <div>
+        <?= $escaper->escapeHtml('No posts in this group!') ?>
+    </div>
+</div>
+<?php endif; ?>

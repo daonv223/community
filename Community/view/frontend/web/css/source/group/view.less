@@ -1,0 +1,138 @@
+& when (@media-common = true) {
+    .group-info-wrapper {
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        border: 1px solid #EEEEEE;
+        border-radius: 3px;
+        border-bottom: 20px;
+
+        .group-image {
+            img {
+                width: 231px;
+                height: 231px;
+                border-radius: 50%;
+            }
+        }
+
+        .group-info {
+            margin-left: 40px;
+
+            .group-name {
+                font-size: 24px;
+                margin-bottom: 16px;
+                font-weight: 700;
+            }
+
+            .group-stats {
+                display: flex;
+                flex-direction: row;
+                font-size: 16px;
+                column-gap: 28px;
+                padding-left: 0;
+                list-style: none;
+                margin-bottom: 18px;
+
+                li {
+                    margin-bottom: 0;
+                    display: flex;
+                }
+
+                .member-info {
+                    .icon {
+                        background-image: url("../DaoNguyen_Community/images/icon-community-members.svg");
+                        background-repeat: no-repeat;
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 29px;
+                        height: 22px;
+                        margin-top: 1px;
+                        margin-bottom: 1px;
+                        margin-right: 8px;
+                        background-position: center;
+                        background-size: 100%;
+                    }
+                }
+
+                .post-info {
+                    .icon {
+                        background-image: url("../DaoNguyen_Community/images/icon-conversation.svg");
+                        height: 24px;
+                        background-repeat: no-repeat;
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 22px;
+                        background-position: center;
+                        background-size: 100%;
+                        margin-right: 8px;
+                    }
+                }
+
+                .count-title-wrapper {
+                    .count {
+                        font-weight: 700;
+                    }
+                }
+            }
+
+            .group-desc {
+                max-width: 480px;
+                margin-bottom: 24px;
+                font-size: 16px;
+            }
+
+            .button-wrapper {
+                a {
+                    text-decoration: none;
+                }
+
+                a:visited {
+                    color: #FFFFFF;
+                }
+            }
+        }
+    }
+
+    .community-button {
+        display: inline-block;
+        margin-bottom: 0;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+        touch-action: manipulation;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        padding: 6px 12px;
+        font-size: 16px;
+        line-height: 26px;
+        border-radius: 4px;
+        user-select: none;
+    }
+
+    .community-button-primary {
+        color: #FFFFFF;
+        background-color: #000;
+        border-color: #000;
+        padding-left: 22px;
+        padding-right: 22px;
+        border-width: 2px;
+        border-radius: 999px;
+        font-size: 14px;
+    }
+
+    .community-group-view {
+        .posts-header {
+            padding: 10px;
+            border-bottom: 1px solid #e8e8e8;
+            margin-bottom: 10px;
+
+            h3 {
+                font-weight: 700;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+        }
+    }
+}

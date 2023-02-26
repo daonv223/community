@@ -8,7 +8,7 @@ $scope = 'button-join-' . $group->getId();
 ?>
 <div class="group-card-item">
     <div class="card-container">
-        <a href="#">
+        <a href="<?= $block->escapeUrl($block->getUrl('community/group/view', ['id' => $group->getId()])) ?>">
             <div class="group-details">
                 <img class="group-avatar" src="<?= $block->escapeHtmlAttr($group->getAvatarUrl()) ?>" alt="Group Avatar">
                 <h4 class="group-name"><?= $block->escapeHtml($group->getName()) ?></h4>

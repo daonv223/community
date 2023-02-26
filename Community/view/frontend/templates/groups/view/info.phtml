@@ -1,0 +1,32 @@
+<?php
+/** @var \DaoNguyen\Community\Block\Group\View\Info $block */
+$group = $block->getGroup();
+?>
+<div class="group-info-wrapper">
+    <div class="group-image">
+        <img src="<?= $block->escapeUrl($group->getAvatarUrl()) ?>" alt="<?= $block->escapeHtmlAttr($group->getName())?>" />
+    </div>
+    <div class="group-info">
+        <h1 class="group-name"><?= $block->escapeHtml($group->getName()) ?></h1>
+        <ul class="group-stats">
+            <li class="member-info">
+                <span class="icon"></span>
+                <span class="count-title-wrapper">
+                    <span class="count"><?= $block->getMemberCount() ?></span>
+                    <span class="title"><?= $block->escapeHtml('Members') ?></span>
+                </span>
+            </li>
+            <li class="post-info">
+                <span class="icon"></span>
+                <span class="count-title-wrapper">
+                    <span class="count"><?= $block->getPostCount() ?></span>
+                    <span class="title"><?= $block->escapeHtml('Posts') ?></span>
+                </span>
+            </li>
+        </ul>
+        <p class="group-desc"><?= $block->escapeHtml($group->getDescription()) ?></p>
+        <div class="button-wrapper">
+            <a href="<?= $block->escapeUrl($block->getUrl('community/post/create', ['group_id' => $group->getEntityId()])) ?>" class="community-button community-button-primary">Create a Post</a>
+        </div>
+    </div>
+</div>
