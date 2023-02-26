@@ -1,0 +1,17 @@
+<?php
+/** @var \DaoNguyen\Community\Block\Member\Gallery $block */
+?>
+<div class="member-gallery-wrapper">
+    <div id="member_gallery" class="member-gallery">
+        <?php foreach ($block->getMedia() as $media): ?>
+            <li><img src="<?= $block->escapeUrl($block->getMediaPath($media->getPath())) ?>" alt="Member Gallery"></li>
+        <?php endforeach; ?>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "#member_gallery": {
+            "DaoNguyen_Community/js/gallery/initGallery": {}
+        }
+    }
+</script>
